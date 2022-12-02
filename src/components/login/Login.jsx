@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import axios from 'axios';
+import jwt from 'jwt-decode';
+import Cookies from 'universal-cookie';
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -10,6 +12,23 @@ const Login = () => {
     password: '',
   });
 
+  const [user, setUser] = useState(null);
+  console.log(user);
+
+  const cookies = new Cookies();
+
+  const logout = () => {
+    setUser(null);
+    cookies.remove('jwt_authorisation');
+  };
+
+  const login = (jwt_token) => {
+    const decoded = jwt(jwt_token);
+    setUser(decoded);
+    cookies.set('jwt_authorisation', jwt_token, {
+      expires: new Date(decoded.exp * 1500),
+    });
+  };
   const [errorMsg, setErrorMsg] = useState(null);
 
   const onChangeHandler = (e) => {
@@ -25,11 +44,13 @@ const Login = () => {
       .post('https://localhost:7162/api/Auth/login', loginData)
       .then((res) => {
         console.log(res.data);
+        login(res.data);
       })
       .catch((err) => {
         setErrorMsg(err.response.data);
       });
   };
+
   return (
     <>
       <h1 className="text-center my-3">Log in</h1>
