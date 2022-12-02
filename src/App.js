@@ -8,6 +8,7 @@ import Pets from './components/pets/Pets';
 import SingleAppointmentDetail from './components/appointments/SingleAppointmentDetail';
 import AddAppointment from './components/appointments/AddAppointment';
 import AddOwner from './components/owners/AddOwner';
+import Login from './components/login/Login';
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
       <Menu />
       <div className="container">
         <Routes>
+          {/* Login */}
+          <Route path="/" element={<Login />} />
           {/* Appointments */}
-          <Route path="/" element={<Appointments />} />
+          <Route path="/Appointments" element={<Appointments />} />
           <Route
             path="/SingleAppointmentDedail"
             element={<SingleAppointmentDetail />}

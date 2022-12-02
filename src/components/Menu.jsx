@@ -14,6 +14,9 @@ const Menu = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Link className="nav-link" to="/">
+                Login
+              </Link>
+              <Link className="nav-link" to="/Appointments">
                 Appointments
               </Link>
               <Link className="nav-link" to="/Owners">
