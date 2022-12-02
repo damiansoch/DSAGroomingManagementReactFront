@@ -1,16 +1,24 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import SingleAppointment from './SingleAppointment';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import SingleAppointment from "./SingleAppointment";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
-
+  const cookies = new Cookies();
+  console.log(cookies.get("jwt_authorisation"));
   useEffect(() => {
-    axios.get('https://localhost:7162/api/Appointments').then((res) => {
-      setAppointments(res.data);
-    });
+    axios
+      .get("https://localhost:7162/api/Appointments", {
+        headers: {
+          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+        },
+      })
+      .then((res) => {
+        setAppointments(res.data);
+      });
   }, []);
   return (
     <>
