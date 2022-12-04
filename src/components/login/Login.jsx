@@ -24,12 +24,36 @@ const Login = () => {
   const cookies = new Cookies();
 
   const login = (jwt_token) => {
-    const decoded = jwt(jwt_token);
+    let decoded = jwt(jwt_token);
     setUser(decoded);
+    axios
+      .get(
+        `https://localhost:7162/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
+      )
+      .then((res) => {
+        console.log(res.data.refreshToken);
+        setInterval(() => {
+          axios({
+            url: 'https://localhost:7162/api/Auth/refresh-token',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'post',
+            data: res.data.refreshToken,
+          }).then((res) => {
+            console.log(res.data);
+            decoded = jwt(res.data);
+            cookies.set('jwt_authorisation', res.data, {
+              expires: new Date(decoded.exp * 1000),
+            });
+          });
+        }, 600000);
+      });
     cookies.set('jwt_authorisation', jwt_token, {
       expires: new Date(decoded.exp * 1000),
     });
   };
+
   const [errorMsg, setErrorMsg] = useState(null);
 
   const onChangeHandler = (e) => {
