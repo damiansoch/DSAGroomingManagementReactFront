@@ -9,31 +9,36 @@ import SingleAppointmentDetail from './components/appointments/SingleAppointment
 import AddAppointment from './components/appointments/AddAppointment';
 import AddOwner from './components/owners/AddOwner';
 import Login from './components/login/Login';
+import { UserProvider } from './context/UserContext';
+import Logout from './components/login/Logout';
 
 function App() {
   return (
     <BrowserRouter>
-      <Menu />
-      <div className="container">
-        <Routes>
-          {/* Login */}
-          <Route path="/" element={<Login />} />
-          {/* Appointments */}
-          <Route path="/Appointments" element={<Appointments />} />
-          <Route
-            path="/SingleAppointmentDedail"
-            element={<SingleAppointmentDetail />}
-          />
-          <Route path="/AddAppointment" element={<AddAppointment />} />
-          {/* Owners */}
+      <UserProvider>
+        <Menu />
+        <div className="container">
+          <Routes>
+            {/* Login */}
+            <Route path="/" element={<Login />} />
+            <Route path="/Logout" element={<Logout />} />
+            {/* Appointments */}
+            <Route path="/Appointments" element={<Appointments />} />
+            <Route
+              path="/SingleAppointmentDedail"
+              element={<SingleAppointmentDetail />}
+            />
+            <Route path="/AddAppointment" element={<AddAppointment />} />
+            {/* Owners */}
 
-          <Route path="/owners" element={<Owners />} />
-          <Route path="/AddOwners" element={<AddOwner />} />
+            <Route path="/owners" element={<Owners />} />
+            <Route path="/AddOwners" element={<AddOwner />} />
 
-          {/* Pets */}
-          <Route path="/Pets" element={<Pets />} />
-        </Routes>
-      </div>
+            {/* Pets */}
+            <Route path="/Pets" element={<Pets />} />
+          </Routes>
+        </div>
+      </UserProvider>
     </BrowserRouter>
   );
 }

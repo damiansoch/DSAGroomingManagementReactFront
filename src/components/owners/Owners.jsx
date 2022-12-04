@@ -2,15 +2,24 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SingleOwner from './SingleOwner';
 import Button from 'react-bootstrap/Button';
+import Cookies from 'universal-cookie';
+
 import { Link } from 'react-router-dom';
 
 const Owners = () => {
   const [owners, setOwners] = useState([]);
+  const cookies = new Cookies();
 
   useEffect(() => {
-    axios.get('https://localhost:7162/api/Owners').then((res) => {
-      setOwners(res.data);
-    });
+    axios
+      .get('https://localhost:7162/api/Owners', {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
+      .then((res) => {
+        setOwners(res.data);
+      });
   }, []);
 
   return (
