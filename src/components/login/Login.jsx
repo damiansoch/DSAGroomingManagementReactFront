@@ -41,8 +41,8 @@ const Login = () => {
             method: 'post',
             data: res.data.refreshToken,
           }).then((res) => {
-            console.log(res.data);
             decoded = jwt(res.data);
+            console.log(res.data);
             cookies.set('jwt_authorisation', res.data, {
               expires: new Date(decoded.exp * 1000),
             });
