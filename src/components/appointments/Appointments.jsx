@@ -7,7 +7,9 @@ import Cookies from 'universal-cookie';
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
+  const [pets, setPets] = useState([]);
   const cookies = new Cookies();
+  //getting all the appointments
   useEffect(() => {
     axios
       .get('https://localhost:7162/api/Appointments', {
@@ -19,6 +21,7 @@ const Appointments = () => {
         setAppointments(res.data);
       });
   }, []);
+
   return (
     <>
       <h1 className="my-5 text-center">Appointments</h1>

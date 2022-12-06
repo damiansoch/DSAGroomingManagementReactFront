@@ -15,7 +15,11 @@ const SingleAppointment = ({ appointments }) => {
         <td>
           {date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear()}
         </td>
-        <td>{date.getHours() + '-' + date.getMinutes()}</td>
+        <td>
+          {date.getHours().toString().padStart(2, '0') +
+            ':' +
+            date.getMinutes().toString().padStart(2, '0')}
+        </td>
 
         <td>{appointment.pet.owner.name}</td>
         <td>{appointment.pet.name}</td>

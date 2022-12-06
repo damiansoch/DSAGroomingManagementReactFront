@@ -1,5 +1,3 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 
 const SingleAppointmentDetail = ({ appointment }) => {
@@ -31,9 +29,9 @@ const SingleAppointmentDetail = ({ appointment }) => {
                 '-' +
                 date.getFullYear() +
                 ' / ' +
-                date.getHours() +
-                '-' +
-                date.getMinutes()}
+                date.getHours().toString().padStart(2, '0') +
+                ':' +
+                date.getMinutes().toString().padStart(2, '0')}
             </td>
             <td>{appointment.pet.name}</td>
             <td>{appointment.pet.owner.name}</td>
