@@ -7,7 +7,6 @@ import Cookies from 'universal-cookie';
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
-  const [pets, setPets] = useState([]);
   const cookies = new Cookies();
   //getting all the appointments
   useEffect(() => {

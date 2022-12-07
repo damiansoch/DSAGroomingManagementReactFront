@@ -47,7 +47,7 @@ const Login = () => {
               expires: new Date(decoded.exp * 1000),
             });
           });
-        }, 600000);
+        }, 300000);
       });
     cookies.set('jwt_authorisation', jwt_token, {
       expires: new Date(decoded.exp * 1000),

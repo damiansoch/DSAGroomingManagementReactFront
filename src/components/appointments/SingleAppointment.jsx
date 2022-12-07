@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import SingleAppointmentDetail from './SingleAppointmentDetail';
+import SingleAddointmentModal from './SingleAddointmentModal';
 
 const SingleAppointment = ({ appointments }) => {
   const [appointment, setAppointment] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
 
-  const appiontmentsArray = appointments.map((appointment, index) => {
-    const date = new Date(appointment.date);
+  const appiontmentsArray = appointments.map((app, index) => {
+    const date = new Date(app.date);
 
     return (
       <tr key={index}>
@@ -21,13 +22,16 @@ const SingleAppointment = ({ appointments }) => {
             date.getMinutes().toString().padStart(2, '0')}
         </td>
 
-        <td>{appointment.pet.owner.name}</td>
-        <td>{appointment.pet.name}</td>
+        <td>{app.pet.owner.name}</td>
+        <td>{app.pet.name}</td>
         <td>
           <Button
-            variant="info"
+            className="mx-1 my-1"
+            variant="primary"
+            size="sm"
             onClick={() => {
-              setAppointment(appointment);
+              setModalShow(true);
+              setAppointment(app);
             }}
           >
             Details
@@ -38,7 +42,15 @@ const SingleAppointment = ({ appointments }) => {
   });
   return (
     <>
-      {appointment && <SingleAppointmentDetail appointment={appointment} />}
+      {appointment && (
+        <SingleAddointmentModal
+          appointment={appointment}
+          show={modalShow}
+          onHide={() => {
+            setModalShow(false);
+          }}
+        />
+      )}
       <h3>All apointments</h3>
       <Table striped bordered hover className="text-center my-1">
         <thead>

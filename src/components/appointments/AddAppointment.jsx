@@ -27,11 +27,11 @@ const AddAppointment = () => {
   }, []);
   //appointment intervace
   const [appointment, setAppointment] = useState({
-    date: new Date(),
+    date: new Date().toISOString().split('.')[0],
     details: '',
     petId: '',
   });
-  console.log(appointment);
+
   //onChangeForm
   const onChangeHandler = (e) => {
     const { name, value } = e;
@@ -57,7 +57,6 @@ const AddAppointment = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         navigate('/Appointments');
       })
       .catch((err) => {

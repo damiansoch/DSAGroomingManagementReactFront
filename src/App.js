@@ -5,12 +5,12 @@ import Menu from './components/Menu';
 import Appointments from './components/appointments/Appointments';
 import Owners from './components/owners/Owners';
 import Pets from './components/pets/Pets';
-import SingleAppointmentDetail from './components/appointments/SingleAppointmentDetail';
 import AddAppointment from './components/appointments/AddAppointment';
 import AddOwner from './components/owners/AddOwner';
 import Login from './components/login/Login';
 import { UserProvider } from './context/UserContext';
 import Logout from './components/login/Logout';
+import SingleAddointmentModal from './components/appointments/SingleAddointmentModal';
 
 function App() {
   return (
@@ -25,8 +25,8 @@ function App() {
             {/* Appointments */}
             <Route path="/Appointments" element={<Appointments />} />
             <Route
-              path="/SingleAppointmentDedail"
-              element={<SingleAppointmentDetail />}
+              path="/SingleAppointmentModal"
+              element={<SingleAddointmentModal />}
             />
             <Route path="/AddAppointment" element={<AddAppointment />} />
             {/* Owners */}
