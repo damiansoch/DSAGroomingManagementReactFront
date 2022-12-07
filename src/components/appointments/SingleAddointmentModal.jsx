@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import { useState } from 'react';
+import EditAppointmentModal from './EditAppointmentModal';
 
 const SingleAddointmentModal = (props) => {
   const date = new Date(props.appointment.date);
@@ -122,6 +123,11 @@ const SingleAddointmentModal = (props) => {
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
+      <EditAppointmentModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        appointment={props.appointment}
+      />
     </div>
   );
 };

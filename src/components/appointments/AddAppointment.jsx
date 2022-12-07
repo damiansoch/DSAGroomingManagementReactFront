@@ -97,25 +97,14 @@ const AddAppointment = () => {
               style={{ height: '100px' }}
               name="details"
               required
+              minLength={3}
               value={appointment.details}
               onChange={(e) => {
                 onChangeHandler(e.target);
               }}
             />
           </FloatingLabel>
-          {/* <FloatingLabel controlId="details" label="Details" className="mb-3">
-            <Form.Control
-              as="textarea"
-              type="text"
-              placeholder="Details"
-              name="details"
-              required
-              value={appointment.details}
-              onChange={(e) => {
-                onChangeHandler(e.target);
-              }}
-            />
-          </FloatingLabel> */}
+
           <Form.Select
             aria-label="Default select example"
             name="petId"
