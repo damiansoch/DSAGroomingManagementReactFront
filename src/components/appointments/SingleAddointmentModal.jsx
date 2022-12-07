@@ -4,11 +4,15 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import { useState } from 'react';
 
 const SingleAddointmentModal = (props) => {
   const date = new Date(props.appointment.date);
   const cookies = new Cookies();
   const navigate = useNavigate();
+  const [modalShow, setModalShow] = useState(false);
 
   //delete appointment
   const deleteAppointmentHandler = () => {
@@ -30,6 +34,20 @@ const SingleAddointmentModal = (props) => {
         console.log(err);
       });
   };
+  const popover = (
+    <Popover id="popover-basic">
+      <Popover.Header as="h3">Confirm delete</Popover.Header>
+      <Popover.Body className="text-center">
+        <h5 className="text-danger">This action can not be undone!</h5>
+        <Button variant="primary" className="me-2" onClick={props.onHide}>
+          Cancel
+        </Button>
+        <Button variant="danger" onClick={deleteAppointmentHandler}>
+          Delete
+        </Button>
+      </Popover.Body>
+    </Popover>
+  );
   return (
     <div>
       <Modal
@@ -95,10 +113,12 @@ const SingleAddointmentModal = (props) => {
           </Table>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="warning">Edit</Button>
-          <Button variant="danger" onClick={deleteAppointmentHandler}>
-            Delete
+          <Button variant="primary" onClick={() => setModalShow(true)}>
+            Edit
           </Button>
+          <OverlayTrigger trigger="click" placement="top" overlay={popover}>
+            <Button variant="danger">Delete</Button>
+          </OverlayTrigger>
           <Button onClick={props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
