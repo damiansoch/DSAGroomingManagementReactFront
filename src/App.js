@@ -10,6 +10,8 @@ import { UserProvider } from './context/UserContext';
 import Logout from './components/login/Logout';
 import { CurrentAppointmentProvider } from './context/CurrentAppointmentContext';
 import EditAppointment from './components/appointments/EditAppointment';
+import DetailsAppointment from './components/appointments/DetailsAppointment';
+import DeleteAppointment from './components/appointments/DeleteAppointment';
 
 function App() {
   return (
@@ -22,10 +24,21 @@ function App() {
               {/* Login */}
               <Route path="/" element={<Login />} />
               <Route path="/Logout" element={<Logout />} />
-              {/* Appointments */}
 
+              {/* Appointments */}
               <Route path="/Appointments" element={<Appointments />} />
-              <Route path="/EditAppointment" element={<EditAppointment />} />
+              <Route
+                path="/Appointments/EditAppointment"
+                element={<EditAppointment />}
+              />
+              <Route
+                path="/Appointments/DeleteAppointment"
+                element={<DeleteAppointment />}
+              />
+              <Route
+                path="/Appointments/DetailsAppointment"
+                element={<DetailsAppointment />}
+              />
 
               {/* Owners */}
 

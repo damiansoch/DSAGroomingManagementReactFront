@@ -26,7 +26,7 @@ const SingleAppointment = ({ appointments }) => {
         <td>{app.pet.owner.name}</td>
         <td>{app.pet.name}</td>
         <td>
-          <Link to="/EditAppointment">
+          <Link to="DetailsAppointment">
             <Button
               className="mx-1 my-1"
               variant="primary"
@@ -38,26 +38,31 @@ const SingleAppointment = ({ appointments }) => {
               Details
             </Button>
           </Link>
-          <Button
-            className="mx-1 my-1"
-            variant="warning"
-            size="sm"
-            onClick={() => {
-              setCurrentAppointment(app);
-            }}
-          >
-            Update
-          </Button>
-          <Button
-            className="mx-1 my-1"
-            variant="danger"
-            size="sm"
-            onClick={() => {
-              setCurrentAppointment(app);
-            }}
-          >
-            Delete
-          </Button>
+
+          <Link to="EditAppointment">
+            <Button
+              className="mx-1 my-1"
+              variant="warning"
+              size="sm"
+              onClick={() => {
+                setCurrentAppointment(app);
+              }}
+            >
+              Edit
+            </Button>
+          </Link>
+          <Link to="DeleteAppointment">
+            <Button
+              className="mx-1 my-1"
+              variant="danger"
+              size="sm"
+              onClick={() => {
+                setCurrentAppointment(app);
+              }}
+            >
+              Delete
+            </Button>
+          </Link>
         </td>
       </tr>
     );
