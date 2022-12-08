@@ -5,39 +5,37 @@ import Menu from './components/Menu';
 import Appointments from './components/appointments/Appointments';
 import Owners from './components/owners/Owners';
 import Pets from './components/pets/Pets';
-import AddAppointment from './components/appointments/AddAppointment';
-import AddOwner from './components/owners/AddOwner';
 import Login from './components/login/Login';
 import { UserProvider } from './context/UserContext';
 import Logout from './components/login/Logout';
-import SingleAddointmentModal from './components/appointments/SingleAddointmentModal';
+import { CurrentAppointmentProvider } from './context/CurrentAppointmentContext';
+import EditAppointment from './components/appointments/EditAppointment';
 
 function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-        <Menu />
-        <div className="container">
-          <Routes>
-            {/* Login */}
-            <Route path="/" element={<Login />} />
-            <Route path="/Logout" element={<Logout />} />
-            {/* Appointments */}
-            <Route path="/Appointments" element={<Appointments />} />
-            <Route
-              path="/SingleAppointmentModal"
-              element={<SingleAddointmentModal />}
-            />
-            <Route path="/AddAppointment" element={<AddAppointment />} />
-            {/* Owners */}
+        <CurrentAppointmentProvider>
+          <Menu />
+          <div className="container">
+            <Routes>
+              {/* Login */}
+              <Route path="/" element={<Login />} />
+              <Route path="/Logout" element={<Logout />} />
+              {/* Appointments */}
 
-            <Route path="/owners" element={<Owners />} />
-            <Route path="/AddOwners" element={<AddOwner />} />
+              <Route path="/Appointments" element={<Appointments />} />
+              <Route path="/EditAppointment" element={<EditAppointment />} />
 
-            {/* Pets */}
-            <Route path="/Pets" element={<Pets />} />
-          </Routes>
-        </div>
+              {/* Owners */}
+
+              <Route path="/owners" element={<Owners />} />
+
+              {/* Pets */}
+              <Route path="/Pets" element={<Pets />} />
+            </Routes>
+          </div>
+        </CurrentAppointmentProvider>
       </UserProvider>
     </BrowserRouter>
   );

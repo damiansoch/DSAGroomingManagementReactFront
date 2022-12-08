@@ -1,11 +1,12 @@
-import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import SingleAddointmentModal from './SingleAddointmentModal';
+
+import CurrentAppointmentContext from '../../context/CurrentAppointmentContext';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 const SingleAppointment = ({ appointments }) => {
-  const [appointment, setAppointment] = useState(null);
-  const [modalShow, setModalShow] = useState(false);
+  const { setCurrentAppointment } = useContext(CurrentAppointmentContext);
 
   const appiontmentsArray = appointments.map((app, index) => {
     const date = new Date(app.date);
@@ -25,16 +26,37 @@ const SingleAppointment = ({ appointments }) => {
         <td>{app.pet.owner.name}</td>
         <td>{app.pet.name}</td>
         <td>
+          <Link to="/EditAppointment">
+            <Button
+              className="mx-1 my-1"
+              variant="primary"
+              size="sm"
+              onClick={() => {
+                setCurrentAppointment(app);
+              }}
+            >
+              Details
+            </Button>
+          </Link>
           <Button
             className="mx-1 my-1"
-            variant="primary"
+            variant="warning"
             size="sm"
             onClick={() => {
-              setModalShow(true);
-              setAppointment(app);
+              setCurrentAppointment(app);
             }}
           >
-            Details
+            Update
+          </Button>
+          <Button
+            className="mx-1 my-1"
+            variant="danger"
+            size="sm"
+            onClick={() => {
+              setCurrentAppointment(app);
+            }}
+          >
+            Delete
           </Button>
         </td>
       </tr>
@@ -42,15 +64,6 @@ const SingleAppointment = ({ appointments }) => {
   });
   return (
     <>
-      {appointment && (
-        <SingleAddointmentModal
-          appointment={appointment}
-          show={modalShow}
-          onHide={() => {
-            setModalShow(false);
-          }}
-        />
-      )}
       <h3>All apointments</h3>
       <Table striped bordered hover className="text-center my-1">
         <thead>
