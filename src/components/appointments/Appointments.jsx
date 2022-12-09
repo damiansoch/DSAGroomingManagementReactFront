@@ -4,8 +4,11 @@ import SingleAppointment from './SingleAppointment';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
+import { useContext } from 'react';
+import UserContext from '../../context/UserContext';
 
 const Appointments = () => {
+  const { logout } = useContext(UserContext);
   const [appointments, setAppointments] = useState([]);
   const cookies = new Cookies();
   //getting all the appointments
@@ -18,6 +21,12 @@ const Appointments = () => {
       })
       .then((res) => {
         setAppointments(res.data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        if (err.message === 'Network Error') {
+          logout();
+        }
       });
   }, []);
 

@@ -2,11 +2,13 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 import CurrentAppointmentContext from '../../context/CurrentAppointmentContext';
-import { useContext } from 'react';
+import DetailsAppointment from './DetailsAppointment';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const SingleAppointment = ({ appointments }) => {
   const { setCurrentAppointment } = useContext(CurrentAppointmentContext);
+  const [modalShow, setModalShow] = useState(false);
 
   const appiontmentsArray = appointments.map((app, index) => {
     const date = new Date(app.date);
@@ -26,18 +28,15 @@ const SingleAppointment = ({ appointments }) => {
         <td>{app.pet.owner.name}</td>
         <td>{app.pet.name}</td>
         <td>
-          <Link to="DetailsAppointment">
-            <Button
-              className="mx-1 my-1"
-              variant="primary"
-              size="sm"
-              onClick={() => {
-                setCurrentAppointment(app);
-              }}
-            >
-              Details
-            </Button>
-          </Link>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setModalShow(true);
+              setCurrentAppointment(app);
+            }}
+          >
+            Details
+          </Button>
 
           <Link to="EditAppointment">
             <Button
@@ -83,6 +82,7 @@ const SingleAppointment = ({ appointments }) => {
         </thead>
         <tbody>{appiontmentsArray}</tbody>
       </Table>
+      <DetailsAppointment show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
 };
