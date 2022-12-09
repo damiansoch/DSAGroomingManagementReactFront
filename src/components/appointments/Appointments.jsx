@@ -1,22 +1,23 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import SingleAppointment from './SingleAppointment';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-import Cookies from 'universal-cookie';
-import { useContext } from 'react';
-import UserContext from '../../context/UserContext';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import SingleAppointment from "./SingleAppointment";
+import Button from "react-bootstrap/Button";
+import Cookies from "universal-cookie";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
+import AddAppointment from "./AddAppointment";
 
 const Appointments = () => {
   const { logout } = useContext(UserContext);
   const [appointments, setAppointments] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
   const cookies = new Cookies();
   //getting all the appointments
   useEffect(() => {
     axios
-      .get('https://localhost:7162/api/Appointments', {
+      .get("https://localhost:7162/api/Appointments", {
         headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
         },
       })
       .then((res) => {
@@ -24,22 +25,21 @@ const Appointments = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        if (err.message === 'Network Error') {
+        if (err.message === "Network Error") {
           logout();
         }
       });
   }, []);
 
   return (
-    <>
+    <div className="text-end my-5">
       <h1 className="my-5 text-center">Appointments</h1>
-      <Link to="/AddAppointment">
-        <Button variant="primary" className="mb-3 me-2 float-end">
-          Add Appointment
-        </Button>
-      </Link>
+      <Button variant="primary" onClick={() => setModalShow(true)}>
+        Add Appointment
+      </Button>
       <SingleAppointment appointments={appointments} />
-    </>
+      <AddAppointment show={modalShow} onHide={() => setModalShow(false)} />
+    </div>
   );
 };
 
