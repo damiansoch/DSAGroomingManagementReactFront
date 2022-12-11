@@ -1,9 +1,16 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import SinglePet from './SinglePet';
 import Cookies from 'universal-cookie';
 
+import { useEffect, useState } from 'react';
+
+import SinglePet from './SinglePet';
+
+import Button from 'react-bootstrap/Button';
+import AddPet from './AddPet';
+
 const Pets = () => {
+  const [modalShow, setModalShow] = useState(false);
+
   const [pets, setPets] = useState([]);
   const cookies = new Cookies();
 
@@ -19,10 +26,18 @@ const Pets = () => {
       });
   }, []);
   return (
-    <>
-      <h3 className="my-5">Pets</h3>
+    <div className="text-end">
+      <h1 className="my-2 text-center">Pets</h1>
+      <Button
+        className="my-2"
+        variant="primary"
+        onClick={() => setModalShow(true)}
+      >
+        Add pet
+      </Button>
       <SinglePet pets={pets} />
-    </>
+      <AddPet show={modalShow} onHide={() => setModalShow(false)} />
+    </div>
   );
 };
 
