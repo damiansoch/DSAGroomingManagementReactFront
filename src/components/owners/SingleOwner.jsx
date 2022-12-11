@@ -3,14 +3,16 @@ import Table from 'react-bootstrap/Table';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import CurrentOwnerContext from '../../context/CurrentOwnerContext';
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import EditOwner from './EditOwner';
 
 const SingleOwner = ({ owners }) => {
+  const [modalEditShow, setModalEditShow] = useState(false);
   const { currentOwner, setCurrentOwner } = useContext(CurrentOwnerContext);
   const cookies = new Cookies();
   const ownersArray = owners.map((owner, index) => {
@@ -55,7 +57,14 @@ const SingleOwner = ({ owners }) => {
         <td>{owner.email}</td>
         <td>{owner.phoneNumber}</td>
         <td>
-          <Button variant="warning" className="mx-2 my-2">
+          <Button
+            variant="warning"
+            onClick={() => {
+              setCurrentOwner(owner);
+              setModalEditShow(true);
+            }}
+            className="my-2 mx-2"
+          >
             Edit
           </Button>
           <OverlayTrigger trigger="focus" placement="left" overlay={popover}>
@@ -73,19 +82,27 @@ const SingleOwner = ({ owners }) => {
     );
   });
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Email</th>
-          <th>Phone number</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>{ownersArray}</tbody>
-    </Table>
+    <>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Phone number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>{ownersArray}</tbody>
+      </Table>
+      {currentOwner && (
+        <EditOwner
+          show={modalEditShow}
+          onHide={() => setModalEditShow(false)}
+        />
+      )}
+    </>
   );
 };
 
