@@ -1,10 +1,10 @@
-import { useContext } from "react";
-import Table from "react-bootstrap/Table";
-import CurrentAppointmentContext from "../../context/CurrentAppointmentContext";
+import { useContext } from 'react';
+import Table from 'react-bootstrap/Table';
+import CurrentAppointmentContext from '../../context/CurrentAppointmentContext';
 
 const DetailsAppointmentBody = () => {
   const { currentAppointment } = useContext(CurrentAppointmentContext);
-  console.log(currentAppointment);
+
   const date = new Date(currentAppointment.date);
 
   return (
@@ -21,17 +21,17 @@ const DetailsAppointmentBody = () => {
         <tbody>
           <tr>
             <td>
-              {" "}
+              {' '}
               {date.getDate() +
-                "-" +
-                date.getMonth() +
-                "-" +
+                '-' +
+                (date.getMonth() + 1) +
+                '-' +
                 date.getFullYear()}
             </td>
             <td>
-              {date.getHours().toString().padStart(2, "0") +
-                ":" +
-                date.getMinutes().toString().padStart(2, "0")}
+              {date.getHours().toString().padStart(2, '0') +
+                ':' +
+                date.getMinutes().toString().padStart(2, '0')}
             </td>
             <td>{currentAppointment.pet.name}</td>
             <td>{currentAppointment.pet.owner.name}</td>

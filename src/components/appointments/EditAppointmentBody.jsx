@@ -1,14 +1,14 @@
 import axios from 'axios';
-import Cookies from 'universal-cookie';
-
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 
-const AddAppointmentBody = ({
-  addAppointmentRequest,
-  setAddAppointmentRequest,
-  petsForDropdown,
+import Cookies from 'universal-cookie';
+
+const EditAppointmentBody = ({
+  editAppointmentRequest,
+  setEditAppointmentRequest,
+  currentAppointment,
 }) => {
   const cookies = new Cookies();
   const navigate = useNavigate();
@@ -18,21 +18,25 @@ const AddAppointmentBody = ({
     const name = evt.target.name;
     const value =
       evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
-    setAddAppointmentRequest({
-      ...addAppointmentRequest,
+    setEditAppointmentRequest({
+      ...editAppointmentRequest,
       [name]: value,
     });
   };
-  console.log(addAppointmentRequest);
+
   //form submit handler
   const formSubmitHandler = (e) => {
     e.preventDefault();
     axios
-      .post('https://localhost:7162/api/Appointments', addAppointmentRequest, {
-        headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-        },
-      })
+      .put(
+        `https://localhost:7162/api/Appointments/${currentAppointment.id}`,
+        editAppointmentRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res.status);
         navigate('/Appointments');
@@ -42,7 +46,6 @@ const AddAppointmentBody = ({
         console.log(err);
       });
   };
-
   return (
     <Form onSubmit={formSubmitHandler}>
       <Form.Group className="mb-3" controlId="formBasicDate">
@@ -50,7 +53,7 @@ const AddAppointmentBody = ({
         <Form.Control
           type="datetime-local"
           placeholder="Select date and time of the appointment"
-          value={addAppointmentRequest.date}
+          value={editAppointmentRequest.date}
           required
           name="date"
           onChange={(evt) => {
@@ -64,7 +67,7 @@ const AddAppointmentBody = ({
         <Form.Control
           as="textarea"
           placeholder="Details"
-          value={addAppointmentRequest.details}
+          value={editAppointmentRequest.details}
           required
           name="details"
           onChange={(evt) => {
@@ -78,19 +81,15 @@ const AddAppointmentBody = ({
         <Form.Select
           name="petId"
           required
-          value={addAppointmentRequest.petId}
+          value={editAppointmentRequest.petId}
           onChange={(evt) => {
             changeHandler(evt);
           }}
         >
-          <option disabled value="">
-            Choose pet
+          <option disabled value={editAppointmentRequest.petId}>
+            {currentAppointment.pet.name}
           </option>
-          {petsForDropdown.map((pet, index) => (
-            <option key={index} value={pet.id}>
-              {pet.name}
-            </option>
-          ))}
+          ))
         </Form.Select>
       </Form.Group>
 
@@ -101,4 +100,4 @@ const AddAppointmentBody = ({
   );
 };
 
-export default AddAppointmentBody;
+export default EditAppointmentBody;
