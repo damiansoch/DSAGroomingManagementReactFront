@@ -18,7 +18,7 @@ const AddPet = (props) => {
     breed: '',
     ownerId: '',
   });
-  console.log(addPetRequest);
+
   //getting owners for the dropdown
   const [ownersForDropdown, setOwnersForDropdown] = useState(null);
   useEffect(() => {

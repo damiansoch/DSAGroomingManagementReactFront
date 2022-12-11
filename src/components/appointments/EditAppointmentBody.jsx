@@ -77,10 +77,10 @@ const EditAppointmentBody = ({
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPetId">
-        <Form.Label>Setect pet name</Form.Label>
         <Form.Select
           name="petId"
           required
+          hidden
           value={editAppointmentRequest.petId}
           onChange={(evt) => {
             changeHandler(evt);
