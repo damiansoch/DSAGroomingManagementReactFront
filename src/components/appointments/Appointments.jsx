@@ -6,9 +6,12 @@ import Cookies from 'universal-cookie';
 import { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import AddAppointment from './AddAppointment';
+import SearchAppointment from './AppointmentSearch/SearchAppointment';
 
 const Appointments = () => {
   const { logout } = useContext(UserContext);
+  const [searchPetName, setSearchPetName] = useState('');
+
   const [appointments, setAppointments] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const cookies = new Cookies();
@@ -33,11 +36,26 @@ const Appointments = () => {
 
   return (
     <div className="text-end ">
+      <Button
+        onClick={() => {
+          setSearchPetName('');
+        }}
+      >
+        Clear all search
+      </Button>
+      <SearchAppointment
+        setSearchPetName={setSearchPetName}
+        searchPetName={searchPetName}
+      />
+
       <h1 className="my-2 text-center">Appointments</h1>
       <Button variant="primary" onClick={() => setModalShow(true)}>
         Add Appointment
       </Button>
-      <SingleAppointment appointments={appointments} />
+      <SingleAppointment
+        appointments={appointments}
+        searchPetName={searchPetName}
+      />
       <AddAppointment show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
