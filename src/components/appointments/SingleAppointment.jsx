@@ -77,10 +77,12 @@ const SingleAppointment = ({
   );
   //-------------------------------------------------------------
   //------------------------filter appointments by a date of the appointment
-  appointments = appointments.filter(
-    (appointment) =>
-      appointment.date >= searchStartDate && appointment.date <= searchEndDate
-  );
+  if ((searchStartDate !== "") & (searchEndDate !== "")) {
+    appointments = appointments.filter(
+      (appointment) =>
+        appointment.date >= searchStartDate && appointment.date <= searchEndDate
+    );
+  }
   //-------------------------------------------------------------
 
   const [modalShow, setModalShow] = useState(false);

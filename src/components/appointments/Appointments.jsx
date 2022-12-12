@@ -13,14 +13,9 @@ const Appointments = () => {
   //use state for searches
   const [searchPetName, setSearchPetName] = useState("");
   const [searchOwnerName, setSearchOwnerName] = useState("");
-  const [searchStartDate, setSearchStartDate] = useState(
-    new Date("01-01-1971").toISOString().split("T")[0]
-  );
-  const [searchEndDate, setSearchEndDate] = useState(
-    new Date("01-01-2060").toISOString().split("T")[0]
-  );
-  console.log(searchStartDate);
-  console.log(searchEndDate);
+  const [searchStartDate, setSearchStartDate] = useState("");
+  const [searchEndDate, setSearchEndDate] = useState("");
+
   //----------------------
 
   const [appointments, setAppointments] = useState([]);
@@ -51,6 +46,8 @@ const Appointments = () => {
         onClick={() => {
           setSearchPetName("");
           setSearchOwnerName("");
+          setSearchStartDate("");
+          setSearchEndDate("");
         }}
       >
         Clear all search
