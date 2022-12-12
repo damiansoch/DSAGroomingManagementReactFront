@@ -1,21 +1,23 @@
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import { useContext, useState } from 'react';
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import { useContext, useState } from "react";
 
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
-import CurrentAppointmentContext from '../../context/CurrentAppointmentContext';
-import DetailsAppointment from './DetailsAppointment';
+import CurrentAppointmentContext from "../../context/CurrentAppointmentContext";
+import DetailsAppointment from "./DetailsAppointment";
 
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-import EditAppointment from './EditAppointment';
+import axios from "axios";
+import Cookies from "universal-cookie";
+import EditAppointment from "./EditAppointment";
 
 const SingleAppointment = ({
   appointments,
   searchPetName,
   searchOwnerName,
+  searchStartDate,
+  searchEndDate,
 }) => {
   const { currentAppointment, setCurrentAppointment } = useContext(
     CurrentAppointmentContext
@@ -30,12 +32,12 @@ const SingleAppointment = ({
         `https://localhost:7162/api/Appointments/${currentAppointment.id}`,
         {
           headers: {
-            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+            Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
           },
         }
       )
       .then((res) => {
-        console.log('deleted');
+        console.log("deleted");
         window.location.reload(false);
       })
       .catch((err) => {
@@ -52,7 +54,7 @@ const SingleAppointment = ({
           Delete
         </Button>
         <Button variant="primary" className="mx-2" onClick={() => {}}>
-          Cancell
+          Cancel
         </Button>
       </Popover.Body>
     </Popover>
@@ -74,6 +76,12 @@ const SingleAppointment = ({
       .includes(searchOwnerName.toString().toLowerCase())
   );
   //-------------------------------------------------------------
+  //------------------------filter appointments by a date of the appointment
+  appointments = appointments.filter(
+    (appointment) =>
+      appointment.date >= searchStartDate && appointment.date <= searchEndDate
+  );
+  //-------------------------------------------------------------
 
   const [modalShow, setModalShow] = useState(false);
   const [editModalShow, setEditModalShow] = useState(false);
@@ -86,15 +94,15 @@ const SingleAppointment = ({
         <td>{index + 1}</td>
         <td>
           {date.getDate() +
-            '-' +
+            "-" +
             (date.getMonth() + 1) +
-            '-' +
+            "-" +
             date.getFullYear()}
         </td>
         <td>
-          {date.getHours().toString().padStart(2, '0') +
-            ':' +
-            date.getMinutes().toString().padStart(2, '0')}
+          {date.getHours().toString().padStart(2, "0") +
+            ":" +
+            date.getMinutes().toString().padStart(2, "0")}
         </td>
 
         <td>{app.pet.owner.name}</td>

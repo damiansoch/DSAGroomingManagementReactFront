@@ -1,20 +1,20 @@
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import AddAppointmentBody from './AddAppointmentBody';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import AddAppointmentBody from "./AddAppointmentBody";
 
-import axios from 'axios';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState } from "react";
+import { useEffect } from "react";
 
 const AddAppointment = (props) => {
   //interface
 
   const [addAppointmentRequest, setAddAppointmentRequest] = useState({
     date: new Date(),
-    details: '',
-    petId: '',
+    details: "",
+    petId: "",
   });
 
   //getting pets for the dropdown
@@ -23,9 +23,9 @@ const AddAppointment = (props) => {
   const cookies = new Cookies();
   useEffect(() => {
     axios
-      .get('https://localhost:7162/api/Pets', {
+      .get("https://localhost:7162/api/Pets", {
         headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
         },
       })
       .then((res) => {
