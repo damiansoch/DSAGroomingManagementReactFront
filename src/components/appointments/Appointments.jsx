@@ -10,7 +10,10 @@ import SearchAppointment from './AppointmentSearch/SearchAppointment';
 
 const Appointments = () => {
   const { logout } = useContext(UserContext);
+  //use state for searches
   const [searchPetName, setSearchPetName] = useState('');
+  const [searchOwnerName, setSearchOwnerName] = useState('');
+  //----------------------
 
   const [appointments, setAppointments] = useState([]);
   const [modalShow, setModalShow] = useState(false);
@@ -39,6 +42,7 @@ const Appointments = () => {
       <Button
         onClick={() => {
           setSearchPetName('');
+          setSearchOwnerName('');
         }}
       >
         Clear all search
@@ -46,6 +50,8 @@ const Appointments = () => {
       <SearchAppointment
         setSearchPetName={setSearchPetName}
         searchPetName={searchPetName}
+        searchOwnerName={searchOwnerName}
+        setSearchOwnerName={setSearchOwnerName}
       />
 
       <h1 className="my-2 text-center">Appointments</h1>
@@ -55,6 +61,7 @@ const Appointments = () => {
       <SingleAppointment
         appointments={appointments}
         searchPetName={searchPetName}
+        searchOwnerName={searchOwnerName}
       />
       <AddAppointment show={modalShow} onHide={() => setModalShow(false)} />
     </div>

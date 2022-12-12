@@ -12,7 +12,11 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import EditAppointment from './EditAppointment';
 
-const SingleAppointment = ({ appointments, searchPetName }) => {
+const SingleAppointment = ({
+  appointments,
+  searchPetName,
+  searchOwnerName,
+}) => {
   const { currentAppointment, setCurrentAppointment } = useContext(
     CurrentAppointmentContext
   );
@@ -54,12 +58,20 @@ const SingleAppointment = ({ appointments, searchPetName }) => {
     </Popover>
   );
   //-------------------------------------------------------------
-  //------------------------filter appointments for a name search
+  //------------------------filter appointments for a pet's name search
   appointments = appointments.filter((appointment) =>
     appointment.pet.name
       .toString()
       .toLowerCase()
       .includes(searchPetName.toString().toLowerCase())
+  );
+  //-------------------------------------------------------------
+  //------------------------filter appointments for a owner's name search
+  appointments = appointments.filter((appointment) =>
+    appointment.pet.owner.name
+      .toString()
+      .toLowerCase()
+      .includes(searchOwnerName.toString().toLowerCase())
   );
   //-------------------------------------------------------------
 

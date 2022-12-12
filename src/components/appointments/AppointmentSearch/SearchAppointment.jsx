@@ -1,7 +1,13 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import SearchName from './SearchName';
+import SearchOwnerName from './SearchOwnerName';
 
-const SearchAppointment = ({ setSearchPetName, searchPetName }) => {
+const SearchAppointment = ({
+  setSearchPetName,
+  searchPetName,
+  searchOwnerName,
+  setSearchOwnerName,
+}) => {
   return (
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic" className="my-2">
@@ -14,9 +20,11 @@ const SearchAppointment = ({ setSearchPetName, searchPetName }) => {
             setSearchPetName={setSearchPetName}
             searchPetName={searchPetName}
           />
+          <SearchOwnerName
+            searchOwnerName={searchOwnerName}
+            setSearchOwnerName={setSearchOwnerName}
+          />
         </div>
-        <Dropdown.Item>Another action</Dropdown.Item>
-        <Dropdown.Item>Something else</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
