@@ -42,12 +42,10 @@ const Menu = () => {
                         Users
                       </Link>
                     </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">
-                      Something
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                      Separated link
+                    <NavDropdown.Item href="#action/3.2">
+                      <Link className="nav-link text-black" to="/Users/AddUser">
+                        Add user
+                      </Link>
                     </NavDropdown.Item>
                   </NavDropdown>
                 </>

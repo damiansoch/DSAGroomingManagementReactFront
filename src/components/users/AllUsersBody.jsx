@@ -13,6 +13,7 @@ const AllUsersBody = ({ users }) => {
             <th>Last Name</th>
             <th>Username</th>
             <th>Email address</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@ const AllUsersBody = ({ users }) => {
                 <td>{user.lastName}</td>
                 <td>{user.username}</td>
                 <td>{user.emailAddress}</td>
+                <td></td>
               </tr>
             ))}
         </tbody>

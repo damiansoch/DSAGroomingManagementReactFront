@@ -14,6 +14,7 @@ import { CurrentAppointmentProvider } from "./context/CurrentAppointmentContext"
 import { CurrentOwnerProvider } from "./context/CurrentOwnerContext";
 import { CurrentPetProvider } from "./context/CurrentPetContext";
 import AllUsers from "./components/users/AllUsers";
+import AddUser from "./components/users/AddUser";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
 
                   {/* Users */}
                   <Route path="/Users" element={<AllUsers />} />
+                  <Route path="/Users/AddUser" element={<AddUser />} />
                 </Routes>
               </div>
             </CurrentPetProvider>

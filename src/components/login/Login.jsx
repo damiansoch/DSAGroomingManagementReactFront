@@ -1,15 +1,15 @@
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
-import { useState } from 'react';
-import { useContext } from 'react';
-import UserContext from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useContext } from "react";
+import UserContext from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-import axios from 'axios';
-import jwt from 'jwt-decode';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+import jwt from "jwt-decode";
+import Cookies from "universal-cookie";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,8 +17,8 @@ const Login = () => {
   const { setUser } = useContext(UserContext);
 
   const [loginData, setLoginData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const cookies = new Cookies();
@@ -28,28 +28,28 @@ const Login = () => {
     setUser(decoded);
     axios
       .get(
-        `https://localhost:7162/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
+        `https://localhost:7162/api/Users/${decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`
       )
       .then((res) => {
         console.log(res.data.refreshToken);
         setInterval(() => {
           axios({
-            url: 'https://localhost:7162/api/Auth/refresh-token',
+            url: "https://localhost:7162/api/Auth/refresh-token",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-            method: 'post',
+            method: "post",
             data: res.data.refreshToken,
           }).then((res) => {
             decoded = jwt(res.data);
             console.log(res.data);
-            cookies.set('jwt_authorisation', res.data, {
+            cookies.set("jwt_authorisation", res.data, {
               expires: new Date(decoded.exp * 1000),
             });
           });
         }, 300000);
       });
-    cookies.set('jwt_authorisation', jwt_token, {
+    cookies.set("jwt_authorisation", jwt_token, {
       expires: new Date(decoded.exp * 1000),
     });
   };
@@ -66,11 +66,11 @@ const Login = () => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post('https://localhost:7162/api/Auth/login', loginData)
+      .post("https://localhost:7162/api/Auth/login", loginData)
       .then((res) => {
         login(res.data);
         setErrorMsg(null);
-        navigate('/Appointments');
+        navigate("/Appointments");
       })
       .catch((err) => {
         setErrorMsg(err.response.data);
