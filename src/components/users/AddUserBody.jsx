@@ -1,17 +1,19 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
 
 const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
+  const navigate = useNavigate();
   const cookies = new Cookies();
 
   //handle form change
   const changeHandler = (evt) => {
     const name = evt.target.name;
     const value =
-      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
+      evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
     setAddUserRequest({
       ...addUserRequest,
       [name]: value,
@@ -20,7 +22,7 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   //handle multi select
   const handleSelect = function (selectedItems) {
     const roles = [];
-    const name = "roleIds";
+    const name = 'roleIds';
 
     for (let i = 0; i < selectedItems.length; i++) {
       roles.push(selectedItems[i].value);
@@ -36,13 +38,14 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://localhost:7162/api/Users", addUserRequest, {
+      .post('https://localhost:7162/api/Users', addUserRequest, {
         headers: {
-          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },
       })
       .then((res) => {
-        console.log("user added");
+        console.log('user added');
+        navigate('/Users');
       })
       .catch((err) => {
         console.log(err);
@@ -133,8 +136,8 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
               handleSelect(e.target.selectedOptions);
             }}
           >
-            {userRoles.map((role) => (
-              <option defaultChecked value={role.id}>
+            {userRoles.map((role, index) => (
+              <option key={index} defaultChecked value={role.id}>
                 {role.name}
               </option>
             ))}
