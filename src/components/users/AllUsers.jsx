@@ -9,7 +9,7 @@ import AllUsersBody from './AllUsersBody';
 const AllUsers = () => {
   const cookies = new Cookies();
   const [users, setUsers] = useState(null);
-  console.log(users);
+  // console.log(users);
 
   useEffect(() => {
     axios

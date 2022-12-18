@@ -15,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { user, setUser } = useContext(UserContext);
-  console.log(user);
 
   const [loginData, setLoginData] = useState({
     username: '',
@@ -33,7 +32,7 @@ const Login = () => {
         `http://damiansoch-001-site1.etempurl.com/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
       )
       .then((res) => {
-        console.log(res.data.refreshToken);
+        // console.log(res.data.refreshToken);
         setInterval(() => {
           axios({
             url: 'http://damiansoch-001-site1.etempurl.com/api/Auth/refresh-token',

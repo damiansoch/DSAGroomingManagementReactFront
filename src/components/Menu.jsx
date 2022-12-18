@@ -5,10 +5,36 @@ import { Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { useContext } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 const Menu = () => {
   const { user } = useContext(UserContext);
 
+  //checking if user is admin
+  const adminOptions = () => {
+    if (user !== null && user !== undefined) {
+      const rolesArray =
+        user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      if (rolesArray.includes('writer')) {
+        return (
+          <NavDropdown title="Admin" id="basic-nav-dropdown" className="mx-5">
+            <NavDropdown.Item href="#action/3.2">
+              <Link className="nav-link text-black" to="/Users">
+                Users
+              </Link>
+            </NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">
+              <Link className="nav-link text-black" to="/Users/AddUser">
+                Add user
+              </Link>
+            </NavDropdown.Item>
+          </NavDropdown>
+        );
+      }
+    }
+  };
+  //---------------------------
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
@@ -18,7 +44,7 @@ const Menu = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               {user == null ? (
-                <Link className="nav-link" to="/">
+                <Link className="nav-link " to="/">
                   Login
                 </Link>
               ) : (
@@ -32,22 +58,10 @@ const Menu = () => {
                   <Link className="nav-link" to="/Pets">
                     Pets
                   </Link>
+                  {adminOptions()}
                   <Link className="nav-link ms-5" to="/Logout">
                     Logout
                   </Link>
-
-                  <NavDropdown title="Admin" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.2">
-                      <Link className="nav-link text-black" to="/Users">
-                        Users
-                      </Link>
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
-                      <Link className="nav-link text-black" to="/Users/AddUser">
-                        Add user
-                      </Link>
-                    </NavDropdown.Item>
-                  </NavDropdown>
                 </>
               )}
             </Nav>

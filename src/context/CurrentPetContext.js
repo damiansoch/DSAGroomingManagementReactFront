@@ -5,7 +5,7 @@ const CurrentPetContext = createContext();
 
 export function CurrentPetProvider({ children }) {
   const [currentPet, setCurrentPet] = useState(null);
-  console.log(currentPet);
+  // console.log(currentPet);
 
   return (
     <CurrentPetContext.Provider value={{ currentPet, setCurrentPet }}>

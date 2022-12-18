@@ -5,7 +5,7 @@ const CurrentOwnerContext = createContext();
 
 export function CurrentOwnerProvider({ children }) {
   const [currentOwner, setCurrentOwner] = useState(null);
-  console.log(currentOwner);
+  // console.log(currentOwner);
 
   return (
     <CurrentOwnerContext.Provider value={{ currentOwner, setCurrentOwner }}>

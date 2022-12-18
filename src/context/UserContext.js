@@ -9,7 +9,6 @@ export function UserProvider({ children }) {
   const [user, setUser] = useState(cookies.get('jwt_authorisation'));
   const [userForDelete, setUserForDelete] = useState({});
   const navigate = useNavigate();
-  console.log(user);
 
   //logout
   const logout = () => {

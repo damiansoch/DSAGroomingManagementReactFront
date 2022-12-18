@@ -41,7 +41,7 @@ const Appointments = () => {
   }, []);
 
   return (
-    <div className="text-end ">
+    <div className="text-end my-2 ">
       <Button
         onClick={() => {
           setSearchPetName('');
