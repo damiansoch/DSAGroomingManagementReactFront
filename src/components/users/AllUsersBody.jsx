@@ -20,11 +20,14 @@ const AllUsersBody = ({ users }) => {
   const deleteUserHandler = () => {
     console.log(userForDelete.id);
     axios
-      .delete(`https://localhost:7162/api/Users/${userForDelete.id}`, {
-        headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-        },
-      })
+      .delete(
+        `http://damiansoch-001-site1.etempurl.com/api/Users/${userForDelete.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          },
+        }
+      )
       .then((res) => {
         console.log('deleted');
         window.location.reload(false);

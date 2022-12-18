@@ -14,7 +14,8 @@ import Cookies from 'universal-cookie';
 const Login = () => {
   const navigate = useNavigate();
 
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  console.log(user);
 
   const [loginData, setLoginData] = useState({
     username: '',
@@ -26,15 +27,16 @@ const Login = () => {
   const login = (jwt_token) => {
     let decoded = jwt(jwt_token);
     setUser(decoded);
+
     axios
       .get(
-        `https://localhost:7162/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
+        `http://damiansoch-001-site1.etempurl.com/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
       )
       .then((res) => {
         console.log(res.data.refreshToken);
         setInterval(() => {
           axios({
-            url: 'https://localhost:7162/api/Auth/refresh-token',
+            url: 'http://damiansoch-001-site1.etempurl.com/api/Auth/refresh-token',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -66,7 +68,10 @@ const Login = () => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post('https://localhost:7162/api/Auth/login', loginData)
+      .post(
+        'http://damiansoch-001-site1.etempurl.com/api/Auth/login',
+        loginData
+      )
       .then((res) => {
         login(res.data);
         setErrorMsg(null);

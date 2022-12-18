@@ -23,11 +23,15 @@ const AddPetForm = ({ ownersForDropdown, addPetRequest, setAddPetRequest }) => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     axios
-      .post('https://localhost:7162/api/Pets', addPetRequest, {
-        headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-        },
-      })
+      .post(
+        'http://damiansoch-001-site1.etempurl.com/api/Pets',
+        addPetRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res.status);
         navigate('/Pets');
