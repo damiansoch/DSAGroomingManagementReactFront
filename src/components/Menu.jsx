@@ -10,28 +10,27 @@ import { useState } from 'react';
 
 const Menu = () => {
   const { user } = useContext(UserContext);
+  console.log(user);
 
   //checking if user is admin
   const adminOptions = () => {
-    if (user !== null && user !== undefined) {
-      const rolesArray =
-        user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-      if (rolesArray.includes('writer')) {
-        return (
-          <NavDropdown title="Admin" id="basic-nav-dropdown" className="mx-5">
-            <NavDropdown.Item href="#action/3.2">
-              <Link className="nav-link text-black" to="/Users">
-                Users
-              </Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              <Link className="nav-link text-black" to="/Users/AddUser">
-                Add user
-              </Link>
-            </NavDropdown.Item>
-          </NavDropdown>
-        );
-      }
+    const rolesArray =
+      user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    if (rolesArray.includes('writer')) {
+      return (
+        <NavDropdown title="Admin" id="basic-nav-dropdown" className="mx-5">
+          <NavDropdown.Item href="#action/3.2">
+            <Link className="nav-link text-black" to="/Users">
+              Users
+            </Link>
+          </NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.2">
+            <Link className="nav-link text-black" to="/Users/AddUser">
+              Add user
+            </Link>
+          </NavDropdown.Item>
+        </NavDropdown>
+      );
     }
   };
   //---------------------------
@@ -58,7 +57,9 @@ const Menu = () => {
                   <Link className="nav-link" to="/Pets">
                     Pets
                   </Link>
-                  {adminOptions()}
+                  {user[
+                    'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+                  ] && adminOptions()}
                   <Link className="nav-link ms-5" to="/Logout">
                     Logout
                   </Link>
