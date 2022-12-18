@@ -39,8 +39,7 @@ const AddAppointmentBody = ({
       )
       .then((res) => {
         console.log(res.status);
-        navigate('/Appointments');
-        window.location.reload(false);
+        window.location.href = '/Appointments';
       })
       .catch((err) => {
         console.log(err);
