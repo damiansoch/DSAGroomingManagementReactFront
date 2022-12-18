@@ -28,7 +28,7 @@ const AddOwnerForm = () => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post('http://damiansoch-001-site1.etempurl.com/api/Owners', owner, {
+      .post('https://damiansoch-001-site1.etempurl.com/api/Owners', owner, {
         headers: {
           Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },

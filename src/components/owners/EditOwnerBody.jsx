@@ -20,7 +20,7 @@ const EditOwnerBody = ({ owner, setOwner, currentOwner }) => {
     e.preventDefault();
     axios
       .put(
-        `http://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
+        `https://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
         owner,
         {
           headers: {

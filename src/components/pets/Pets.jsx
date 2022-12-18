@@ -16,7 +16,7 @@ const Pets = () => {
 
   useEffect(() => {
     axios
-      .get('http://damiansoch-001-site1.etempurl.com/api/Pets', {
+      .get('https://damiansoch-001-site1.etempurl.com/api/Pets', {
         headers: {
           Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },

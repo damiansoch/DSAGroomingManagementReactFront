@@ -29,7 +29,7 @@ const SingleAppointment = ({
   const deleteAppointmentHandler = () => {
     axios
       .delete(
-        `http://damiansoch-001-site1.etempurl.com/api/Appointments/${currentAppointment.id}`,
+        `https://damiansoch-001-site1.etempurl.com/api/Appointments/${currentAppointment.id}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,

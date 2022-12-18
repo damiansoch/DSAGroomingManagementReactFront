@@ -20,7 +20,7 @@ const SingleOwner = ({ owners }) => {
     const deleteOwnerHandler = () => {
       axios
         .delete(
-          `http://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
+          `https://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
           {
             headers: {
               Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,

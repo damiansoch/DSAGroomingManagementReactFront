@@ -24,7 +24,7 @@ const EditPetForm = ({ currentPet, editPetRequest, setEditPetRequest }) => {
     e.preventDefault();
     axios
       .put(
-        `http://damiansoch-001-site1.etempurl.com/api/Pets/${currentPet.id}`,
+        `https://damiansoch-001-site1.etempurl.com/api/Pets/${currentPet.id}`,
         editPetRequest,
         {
           headers: {

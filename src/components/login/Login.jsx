@@ -29,13 +29,13 @@ const Login = () => {
 
     axios
       .get(
-        `http://damiansoch-001-site1.etempurl.com/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
+        `https://damiansoch-001-site1.etempurl.com/api/Users/${decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress']}`
       )
       .then((res) => {
         // console.log(res.data.refreshToken);
         setInterval(() => {
           axios({
-            url: 'http://damiansoch-001-site1.etempurl.com/api/Auth/refresh-token',
+            url: 'https://damiansoch-001-site1.etempurl.com/api/Auth/refresh-token',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -68,7 +68,7 @@ const Login = () => {
     e.preventDefault();
     axios
       .post(
-        'http://damiansoch-001-site1.etempurl.com/api/Auth/login',
+        'https://damiansoch-001-site1.etempurl.com/api/Auth/login',
         loginData
       )
       .then((res) => {

@@ -24,7 +24,7 @@ const Appointments = () => {
   //getting all the appointments
   useEffect(() => {
     axios
-      .get('http://damiansoch-001-site1.etempurl.com/api/Appointments', {
+      .get('https://damiansoch-001-site1.etempurl.com/api/Appointments', {
         headers: {
           Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },

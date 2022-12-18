@@ -39,7 +39,7 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
     e.preventDefault();
     axios
       .post(
-        'http://damiansoch-001-site1.etempurl.com/api/Users',
+        'https://damiansoch-001-site1.etempurl.com/api/Users',
         addUserRequest,
         {
           headers: {

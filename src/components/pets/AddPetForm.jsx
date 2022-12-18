@@ -24,7 +24,7 @@ const AddPetForm = ({ ownersForDropdown, addPetRequest, setAddPetRequest }) => {
     e.preventDefault();
     axios
       .post(
-        'http://damiansoch-001-site1.etempurl.com/api/Pets',
+        'https://damiansoch-001-site1.etempurl.com/api/Pets',
         addPetRequest,
         {
           headers: {

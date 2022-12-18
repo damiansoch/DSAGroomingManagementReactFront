@@ -23,7 +23,7 @@ const AddPet = (props) => {
   const [ownersForDropdown, setOwnersForDropdown] = useState(null);
   useEffect(() => {
     axios
-      .get('http://damiansoch-001-site1.etempurl.com/api/Owners', {
+      .get('https://damiansoch-001-site1.etempurl.com/api/Owners', {
         headers: {
           Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },

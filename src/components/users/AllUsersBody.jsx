@@ -21,7 +21,7 @@ const AllUsersBody = ({ users }) => {
     console.log(userForDelete.id);
     axios
       .delete(
-        `http://damiansoch-001-site1.etempurl.com/api/Users/${userForDelete.id}`,
+        `https://damiansoch-001-site1.etempurl.com/api/Users/${userForDelete.id}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,

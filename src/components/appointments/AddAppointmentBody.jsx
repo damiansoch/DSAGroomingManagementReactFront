@@ -29,7 +29,7 @@ const AddAppointmentBody = ({
     e.preventDefault();
     axios
       .post(
-        'http://damiansoch-001-site1.etempurl.com/api/Appointments',
+        'https://damiansoch-001-site1.etempurl.com/api/Appointments',
         addAppointmentRequest,
         {
           headers: {
