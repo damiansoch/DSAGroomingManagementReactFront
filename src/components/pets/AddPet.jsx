@@ -1,31 +1,31 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect } from "react";
+import { useState } from "react";
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-import AddPetForm from './AddPetForm';
+import AddPetForm from "./AddPetForm";
 
 const AddPet = (props) => {
   const cookies = new Cookies();
   //interface
   const [addPetRequest, setAddPetRequest] = useState({
-    name: '',
-    type: '',
-    breed: '',
-    ownerId: '',
+    name: "",
+    type: "",
+    breed: "",
+    ownerId: "",
   });
 
   //getting owners for the dropdown
   const [ownersForDropdown, setOwnersForDropdown] = useState(null);
   useEffect(() => {
     axios
-      .get('https://localhost:7162/api/Owners', {
+      .get("http://damiansoch-001-site1.etempurl.com/api/Owners", {
         headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
         },
       })
       .then((res) => {

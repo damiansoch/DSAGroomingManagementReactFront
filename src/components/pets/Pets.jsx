@@ -1,12 +1,12 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import SinglePet from './SinglePet';
+import SinglePet from "./SinglePet";
 
-import Button from 'react-bootstrap/Button';
-import AddPet from './AddPet';
+import Button from "react-bootstrap/Button";
+import AddPet from "./AddPet";
 
 const Pets = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -16,9 +16,9 @@ const Pets = () => {
 
   useEffect(() => {
     axios
-      .get('https://localhost:7162/api/Pets', {
+      .get("http://damiansoch-001-site1.etempurl.com/api/Pets", {
         headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
         },
       })
       .then((res) => {

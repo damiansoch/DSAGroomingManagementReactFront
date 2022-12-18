@@ -1,21 +1,21 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { useState } from 'react';
-import Cookies from 'universal-cookie';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { useState } from "react";
+import Cookies from "universal-cookie";
 
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddOwnerForm = () => {
   const navigate = useNavigate();
   const cookies = new Cookies();
 
   const [owner, setOwner] = useState({
-    name: '',
-    homeAddress: '',
-    phoneNumber: '',
-    email: '',
+    name: "",
+    homeAddress: "",
+    phoneNumber: "",
+    email: "",
   });
 
   const onChangeHandler = (e) => {
@@ -28,14 +28,14 @@ const AddOwnerForm = () => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post('https://localhost:7162/api/Owners', owner, {
+      .post("http://damiansoch-001-site1.etempurl.com/api/Owners", owner, {
         headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
         },
       })
       .then((res) => {
         console.log(res.data);
-        navigate('/Owners');
+        navigate("/Owners");
       })
       .catch((err) => {
         console.log(err);

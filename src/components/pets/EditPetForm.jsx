@@ -1,9 +1,9 @@
-import axios from 'axios';
-import Cookies from 'universal-cookie';
+import axios from "axios";
+import Cookies from "universal-cookie";
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
 const EditPetForm = ({ currentPet, editPetRequest, setEditPetRequest }) => {
   const cookies = new Cookies();
@@ -12,7 +12,7 @@ const EditPetForm = ({ currentPet, editPetRequest, setEditPetRequest }) => {
   const changeHandler = (evt) => {
     const name = evt.target.name;
     const value =
-      evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
+      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
     setEditPetRequest({
       ...editPetRequest,
       [name]: value,
@@ -23,14 +23,18 @@ const EditPetForm = ({ currentPet, editPetRequest, setEditPetRequest }) => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     axios
-      .put(`https://localhost:7162/api/Pets/${currentPet.id}`, editPetRequest, {
-        headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-        },
-      })
+      .put(
+        `http://damiansoch-001-site1.etempurl.com/api/Pets/${currentPet.id}`,
+        editPetRequest,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+          },
+        }
+      )
       .then((res) => {
         console.log(res.status);
-        navigate('/Pets');
+        navigate("/Pets");
         window.location.reload(false);
       })
       .catch((err) => {

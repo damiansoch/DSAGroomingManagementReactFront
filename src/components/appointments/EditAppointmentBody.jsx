@@ -1,9 +1,9 @@
-import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 
 const EditAppointmentBody = ({
   editAppointmentRequest,
@@ -17,7 +17,7 @@ const EditAppointmentBody = ({
   const changeHandler = (evt) => {
     const name = evt.target.name;
     const value =
-      evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
+      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
     setEditAppointmentRequest({
       ...editAppointmentRequest,
       [name]: value,
@@ -29,17 +29,17 @@ const EditAppointmentBody = ({
     e.preventDefault();
     axios
       .put(
-        `https://localhost:7162/api/Appointments/${currentAppointment.id}`,
+        `http://damiansoch-001-site1.etempurl.com/api/Appointments/${currentAppointment.id}`,
         editAppointmentRequest,
         {
           headers: {
-            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+            Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
           },
         }
       )
       .then((res) => {
         console.log(res.status);
-        navigate('/Appointments');
+        navigate("/Appointments");
         window.location.reload(false);
       })
       .catch((err) => {

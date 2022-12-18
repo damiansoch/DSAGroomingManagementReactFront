@@ -28,13 +28,13 @@ const Login = () => {
     setUser(decoded);
     axios
       .get(
-        `https://localhost:7162/api/Users/${decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`
+        `http://damiansoch-001-site1.etempurl.com/api/Users/${decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]}`
       )
       .then((res) => {
         console.log(res.data.refreshToken);
         setInterval(() => {
           axios({
-            url: "https://localhost:7162/api/Auth/refresh-token",
+            url: "http://damiansoch-001-site1.etempurl.com/api/Auth/refresh-token",
             headers: {
               "Content-Type": "application/json",
             },
@@ -66,7 +66,10 @@ const Login = () => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .post("https://localhost:7162/api/Auth/login", loginData)
+      .post(
+        "http://damiansoch-001-site1.etempurl.com/api/Auth/login",
+        loginData
+      )
       .then((res) => {
         login(res.data);
         setErrorMsg(null);

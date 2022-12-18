@@ -13,7 +13,7 @@ const AllUsers = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7162/api/Users", {
+      .get("http://damiansoch-001-site1.etempurl.com/api/Users", {
         headers: {
           Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
         },
