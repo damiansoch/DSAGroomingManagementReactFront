@@ -1,21 +1,21 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 
-import AddUserBody from "./AddUserBody";
+import AddUserBody from './AddUserBody';
 
 const AddUser = () => {
   const cookies = new Cookies();
 
   //add user request interface
   const [addUserRequest, setAddUserRequest] = useState({
-    username: "",
-    emailAddress: "",
-    password: "",
-    firstName: "",
-    lastName: "",
+    username: '',
+    emailAddress: '',
+    password: '',
+    firstName: '',
+    lastName: '',
     roleIds: [],
   });
 
@@ -24,9 +24,9 @@ const AddUser = () => {
   // getting all roles for the select
   useEffect(() => {
     axios
-      .get("http://damiansoch-001-site1.etempurl.com/api/Roles", {
+      .get('https://localhost:7162/api/Roles', {
         headers: {
-          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },
       })
       .then((res) => {

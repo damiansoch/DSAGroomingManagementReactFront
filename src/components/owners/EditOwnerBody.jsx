@@ -1,9 +1,9 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
-import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
-import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
 
 const EditOwnerBody = ({ owner, setOwner, currentOwner }) => {
   const cookies = new Cookies();
@@ -19,18 +19,14 @@ const EditOwnerBody = ({ owner, setOwner, currentOwner }) => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .put(
-        `http://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
-        owner,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
-          },
-        }
-      )
+      .put(`https://localhost:7162/api/Owners/${currentOwner.id}`, owner, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
       .then((res) => {
-        console.log("updated");
-        navigate("/Owners");
+        console.log('updated');
+        navigate('/Owners');
         window.location.reload(false);
       })
       .catch((err) => {

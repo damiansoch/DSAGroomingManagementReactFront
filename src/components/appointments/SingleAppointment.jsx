@@ -1,16 +1,16 @@
-import Table from "react-bootstrap/Table";
-import Button from "react-bootstrap/Button";
-import { useContext, useState } from "react";
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+import { useContext, useState } from 'react';
 
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
-import CurrentAppointmentContext from "../../context/CurrentAppointmentContext";
-import DetailsAppointment from "./DetailsAppointment";
+import CurrentAppointmentContext from '../../context/CurrentAppointmentContext';
+import DetailsAppointment from './DetailsAppointment';
 
-import axios from "axios";
-import Cookies from "universal-cookie";
-import EditAppointment from "./EditAppointment";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
+import EditAppointment from './EditAppointment';
 
 const SingleAppointment = ({
   appointments,
@@ -29,15 +29,15 @@ const SingleAppointment = ({
   const deleteAppointmentHandler = () => {
     axios
       .delete(
-        `http://damiansoch-001-site1.etempurl.com/api/Appointments/${currentAppointment.id}`,
+        `https://localhost:7162/api/Appointments/${currentAppointment.id}`,
         {
           headers: {
-            Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
           },
         }
       )
       .then((res) => {
-        console.log("deleted");
+        console.log('deleted');
         window.location.reload(false);
       })
       .catch((err) => {
@@ -77,7 +77,7 @@ const SingleAppointment = ({
   );
   //-------------------------------------------------------------
   //------------------------filter appointments by a date of the appointment
-  if ((searchStartDate !== "") & (searchEndDate !== "")) {
+  if ((searchStartDate !== '') & (searchEndDate !== '')) {
     appointments = appointments.filter(
       (appointment) =>
         appointment.date >= searchStartDate && appointment.date <= searchEndDate
@@ -96,15 +96,15 @@ const SingleAppointment = ({
         <td>{index + 1}</td>
         <td>
           {date.getDate() +
-            "-" +
+            '-' +
             (date.getMonth() + 1) +
-            "-" +
+            '-' +
             date.getFullYear()}
         </td>
         <td>
-          {date.getHours().toString().padStart(2, "0") +
-            ":" +
-            date.getMinutes().toString().padStart(2, "0")}
+          {date.getHours().toString().padStart(2, '0') +
+            ':' +
+            date.getMinutes().toString().padStart(2, '0')}
         </td>
 
         <td>{app.pet.owner.name}</td>

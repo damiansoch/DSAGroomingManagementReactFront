@@ -1,20 +1,20 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import SingleAppointment from "./SingleAppointment";
-import Button from "react-bootstrap/Button";
-import Cookies from "universal-cookie";
-import { useContext } from "react";
-import UserContext from "../../context/UserContext";
-import AddAppointment from "./AddAppointment";
-import SearchAppointment from "./AppointmentSearch/SearchAppointment";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import SingleAppointment from './SingleAppointment';
+import Button from 'react-bootstrap/Button';
+import Cookies from 'universal-cookie';
+import { useContext } from 'react';
+import UserContext from '../../context/UserContext';
+import AddAppointment from './AddAppointment';
+import SearchAppointment from './AppointmentSearch/SearchAppointment';
 
 const Appointments = () => {
   const { logout } = useContext(UserContext);
   //use state for searches
-  const [searchPetName, setSearchPetName] = useState("");
-  const [searchOwnerName, setSearchOwnerName] = useState("");
-  const [searchStartDate, setSearchStartDate] = useState("");
-  const [searchEndDate, setSearchEndDate] = useState("");
+  const [searchPetName, setSearchPetName] = useState('');
+  const [searchOwnerName, setSearchOwnerName] = useState('');
+  const [searchStartDate, setSearchStartDate] = useState('');
+  const [searchEndDate, setSearchEndDate] = useState('');
 
   //----------------------
 
@@ -24,9 +24,9 @@ const Appointments = () => {
   //getting all the appointments
   useEffect(() => {
     axios
-      .get("http://damiansoch-001-site1.etempurl.com/api/Appointments", {
+      .get('https://localhost:7162/api/Appointments', {
         headers: {
-          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },
       })
       .then((res) => {
@@ -34,7 +34,7 @@ const Appointments = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        if (err.message === "Network Error") {
+        if (err.message === 'Network Error') {
           logout();
         }
       });
@@ -44,10 +44,10 @@ const Appointments = () => {
     <div className="text-end ">
       <Button
         onClick={() => {
-          setSearchPetName("");
-          setSearchOwnerName("");
-          setSearchStartDate("");
-          setSearchEndDate("");
+          setSearchPetName('');
+          setSearchOwnerName('');
+          setSearchStartDate('');
+          setSearchEndDate('');
         }}
       >
         Clear all search

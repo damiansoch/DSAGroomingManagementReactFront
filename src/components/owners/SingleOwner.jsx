@@ -1,15 +1,15 @@
-import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
-import Popover from "react-bootstrap/Popover";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
-import { useContext, useState } from "react";
+import { useContext, useState } from 'react';
 
-import CurrentOwnerContext from "../../context/CurrentOwnerContext";
+import CurrentOwnerContext from '../../context/CurrentOwnerContext';
 
-import Cookies from "universal-cookie";
-import axios from "axios";
-import EditOwner from "./EditOwner";
+import Cookies from 'universal-cookie';
+import axios from 'axios';
+import EditOwner from './EditOwner';
 
 const SingleOwner = ({ owners }) => {
   const [modalEditShow, setModalEditShow] = useState(false);
@@ -17,19 +17,15 @@ const SingleOwner = ({ owners }) => {
   const cookies = new Cookies();
   const ownersArray = owners.map((owner, index) => {
     //popover for delete owner
-
     const deleteOwnerHandler = () => {
       axios
-        .delete(
-          `http://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
-            },
-          }
-        )
+        .delete(`https://localhost:7162/api/Owners/${currentOwner.id}`, {
+          headers: {
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          },
+        })
         .then((res) => {
-          console.log("Owner deleted");
+          console.log('Owner deleted');
           window.location.reload(false);
         })
         .catch((err) => {

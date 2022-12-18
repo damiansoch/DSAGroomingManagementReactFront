@@ -1,9 +1,9 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
 
 const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   const changeHandler = (evt) => {
     const name = evt.target.name;
     const value =
-      evt.target.type === "checkbox" ? evt.target.checked : evt.target.value;
+      evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
     setAddUserRequest({
       ...addUserRequest,
       [name]: value,
@@ -22,7 +22,7 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   //handle multi select
   const handleSelect = function (selectedItems) {
     const roles = [];
-    const name = "roleIds";
+    const name = 'roleIds';
 
     for (let i = 0; i < selectedItems.length; i++) {
       roles.push(selectedItems[i].value);
@@ -38,18 +38,14 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        "http://damiansoch-001-site1.etempurl.com/api/Users",
-        addUserRequest,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
-          },
-        }
-      )
+      .post('https://localhost:7162/api/Users', addUserRequest, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
       .then((res) => {
-        console.log("user added");
-        navigate("/Users");
+        console.log('user added');
+        navigate('/Users');
       })
       .catch((err) => {
         console.log(err);

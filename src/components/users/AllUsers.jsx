@@ -1,10 +1,10 @@
-import axios from "axios";
-import Cookies from "universal-cookie";
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import AllUsersBody from "./AllUsersBody";
+import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import AllUsersBody from './AllUsersBody';
 
 const AllUsers = () => {
   const cookies = new Cookies();
@@ -13,9 +13,9 @@ const AllUsers = () => {
 
   useEffect(() => {
     axios
-      .get("http://damiansoch-001-site1.etempurl.com/api/Users", {
+      .get('https://localhost:7162/api/Users', {
         headers: {
-          Authorization: `Bearer ${cookies.get("jwt_authorisation")}`,
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },
       })
       .then((res) => {

@@ -8,6 +8,7 @@ const cookies = new Cookies();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(cookies.get('jwt_authorisation'));
+  const [userForDelete, setUserForDelete] = useState({});
   const navigate = useNavigate();
 
   //logout
@@ -19,7 +20,9 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ setUser, user, logout }}>
+    <UserContext.Provider
+      value={{ setUser, user, logout, userForDelete, setUserForDelete }}
+    >
       {children}
     </UserContext.Provider>
   );
