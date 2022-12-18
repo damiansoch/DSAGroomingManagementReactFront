@@ -49,7 +49,7 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
       )
       .then((res) => {
         console.log('user added');
-        navigate('/Users');
+        navigate('/Users', { replace: true });
       })
       .catch((err) => {
         console.log(err);

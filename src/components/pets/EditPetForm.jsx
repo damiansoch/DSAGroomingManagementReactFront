@@ -34,7 +34,7 @@ const EditPetForm = ({ currentPet, editPetRequest, setEditPetRequest }) => {
       )
       .then((res) => {
         console.log(res.status);
-        navigate('/Pets');
+        navigate('/Pets', { replace: true });
         window.location.reload(false);
       })
       .catch((err) => {
