@@ -1,6 +1,6 @@
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { useContext, useState } from 'react';
+import { Fragment, useContext, useState } from 'react';
 
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -107,9 +107,9 @@ const SingleAppointment = ({
             date.getMinutes().toString().padStart(2, '0')}
         </td>
 
-        <td>{app.pet.owner.name}</td>
         <td>{app.pet.name}</td>
-        <td>
+
+        <td colSpan={5}>
           <Button
             variant="primary"
             onClick={() => {
@@ -153,9 +153,9 @@ const SingleAppointment = ({
             <th>#</th>
             <th>Date</th>
             <th>Time</th>
-            <th>Owner</th>
             <th>Pet</th>
             <th>Actions</th>
+            {/* <th>Actions</th> */}
           </tr>
         </thead>
         <tbody>{appiontmentsArray}</tbody>

@@ -15,7 +15,7 @@ const DetailsAppointmentBody = () => {
             <th>Date</th>
             <th>Time</th>
             <th>Pet Name</th>
-            <th>Owner Name</th>
+            <th>Owner</th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +34,10 @@ const DetailsAppointmentBody = () => {
                 date.getMinutes().toString().padStart(2, '0')}
             </td>
             <td>{currentAppointment.pet.name}</td>
-            <td>{currentAppointment.pet.owner.name}</td>
+            <td>
+              {currentAppointment.pet.owner.name}{' '}
+              {currentAppointment.pet.owner.phoneNumber}
+            </td>
           </tr>
           <tr>
             <td colSpan={4}>{currentAppointment.details}</td>
