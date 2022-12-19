@@ -39,8 +39,7 @@ const EditAppointmentBody = ({
       )
       .then((res) => {
         console.log(res.status);
-        navigate('/Appointments');
-        window.location.reload(false);
+        navigate('/Sucess', { replace: true });
       })
       .catch((err) => {
         console.log(err);

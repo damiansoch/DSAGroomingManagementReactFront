@@ -38,8 +38,8 @@ const AddAppointmentBody = ({
         }
       )
       .then((res) => {
-        console.log(res.status);
-        navigate('/Appointments', { replace: true });
+        console.log('appointment added');
+        navigate('/Sucess', { replace: true });
       })
       .catch((err) => {
         console.log(err);

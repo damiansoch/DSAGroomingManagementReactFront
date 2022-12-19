@@ -1,20 +1,21 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Login from "./components/login/Login";
-import Logout from "./components/login/Logout";
-import Menu from "./components/Menu";
-import Appointments from "./components/appointments/Appointments";
-import EditAppointment from "./components/appointments/EditAppointment";
-import Owners from "./components/owners/Owners";
-import AddOwner from "./components/owners/AddOwner";
-import Pets from "./components/pets/Pets";
+import Login from './components/login/Login';
+import Logout from './components/login/Logout';
+import Menu from './components/Menu';
+import Appointments from './components/appointments/Appointments';
+import EditAppointment from './components/appointments/EditAppointment';
+import Owners from './components/owners/Owners';
+import AddOwner from './components/owners/AddOwner';
+import Pets from './components/pets/Pets';
 
-import { UserProvider } from "./context/UserContext";
-import { CurrentAppointmentProvider } from "./context/CurrentAppointmentContext";
-import { CurrentOwnerProvider } from "./context/CurrentOwnerContext";
-import { CurrentPetProvider } from "./context/CurrentPetContext";
-import AllUsers from "./components/users/AllUsers";
-import AddUser from "./components/users/AddUser";
+import { UserProvider } from './context/UserContext';
+import { CurrentAppointmentProvider } from './context/CurrentAppointmentContext';
+import { CurrentOwnerProvider } from './context/CurrentOwnerContext';
+import { CurrentPetProvider } from './context/CurrentPetContext';
+import AllUsers from './components/users/AllUsers';
+import AddUser from './components/users/AddUser';
+import RequestOK from './components/RequestOK';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Menu />
               <div className="container">
                 <Routes>
+                  <Route path="/Sucess" element={<RequestOK />} />
                   {/* Login */}
                   <Route path="/" element={<Login />} />
                   <Route path="/Logout" element={<Logout />} />

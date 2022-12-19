@@ -34,8 +34,7 @@ const AddPetForm = ({ ownersForDropdown, addPetRequest, setAddPetRequest }) => {
       )
       .then((res) => {
         console.log(res.status);
-        navigate('/Pets');
-        window.location.reload(false);
+        navigate('/Sucess', { replace: true });
       })
       .catch((err) => {
         console.log(err.message);

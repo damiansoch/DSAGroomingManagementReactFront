@@ -35,7 +35,7 @@ const AddOwnerForm = () => {
       })
       .then((res) => {
         console.log(res.data);
-        navigate('/Owners', { replace: true });
+        navigate('/Sucess', { replace: true });
       })
       .catch((err) => {
         console.log(err);

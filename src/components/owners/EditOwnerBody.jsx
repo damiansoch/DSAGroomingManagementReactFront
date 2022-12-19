@@ -30,8 +30,7 @@ const EditOwnerBody = ({ owner, setOwner, currentOwner }) => {
       )
       .then((res) => {
         console.log('updated');
-        navigate('/Owners');
-        window.location.reload(false);
+        navigate('/Sucess', { replace: true });
       })
       .catch((err) => {
         console.log(err);
