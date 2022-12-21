@@ -4,8 +4,12 @@ import Cookies from 'universal-cookie';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
+  //error msg
+  const [errorMsg, setErrorMsg] = useState('');
+
   const navigate = useNavigate();
   const cookies = new Cookies();
 
@@ -38,27 +42,25 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        'https://damiansoch-001-site1.etempurl.com/api/Users',
-        addUserRequest,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-          },
-        }
-      )
+      .post('https://localhost:7162/api/Users', addUserRequest, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
       .then((res) => {
         console.log('user added');
         navigate('/Sucess', { replace: true });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
+        setErrorMsg(err.response.data);
       });
   };
 
   return (
     <>
       <h1>Add user</h1>
+      <p className="text-center text-danger">{errorMsg}</p>
       <Form className="col-6 mx-auto mt-5" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicFName">
           <Form.Label>First name</Form.Label>

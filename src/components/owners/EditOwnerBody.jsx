@@ -19,15 +19,11 @@ const EditOwnerBody = ({ owner, setOwner, currentOwner }) => {
   const submitForm = (e) => {
     e.preventDefault();
     axios
-      .put(
-        `https://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
-        owner,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-          },
-        }
-      )
+      .put(`https://localhost:7162/api/Owners/${currentOwner.id}`, owner, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
       .then((res) => {
         console.log('updated');
         navigate('/Sucess', { replace: true });
