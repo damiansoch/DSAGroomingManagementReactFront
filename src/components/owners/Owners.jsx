@@ -12,7 +12,7 @@ const Owners = () => {
 
   useEffect(() => {
     axios
-      .get('https://localhost:7162/api/Owners', {
+      .get('https://damiansoch-001-site1.etempurl.com/api/Owners', {
         headers: {
           Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },
