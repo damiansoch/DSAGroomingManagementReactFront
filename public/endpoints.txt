@@ -1,2 +1,2 @@
-http://damiansoch-001-site1.etempurl.com/api
+https://damiansoch-001-site1.etempurl.com/api
 https://localhost:7162/api

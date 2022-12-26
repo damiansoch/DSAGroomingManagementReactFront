@@ -1,18 +1,30 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import SingleAppointment from './SingleAppointment';
-import Button from 'react-bootstrap/Button';
 import Cookies from 'universal-cookie';
+
+import { useEffect, useState } from 'react';
 import { useContext } from 'react';
+
+import SingleAppointment from './SingleAppointment';
+
+import Spinner from 'react-bootstrap/Spinner';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 import UserContext from '../../context/UserContext';
 import AddAppointment from './AddAppointment';
 import SearchAppointment from './AppointmentSearch/SearchAppointment';
-import Spinner from 'react-bootstrap/Spinner';
 
 const Appointments = () => {
   const [loading, setLoading] = useState(false);
 
   const { logout } = useContext(UserContext);
+  //skip-take params
+  const [skipTake, setSkipTake] = useState({
+    skip: 0,
+    take: 10,
+  });
   //use state for searches
   const [searchPetName, setSearchPetName] = useState('');
   const [searchOwnerName, setSearchOwnerName] = useState('');
@@ -27,11 +39,14 @@ const Appointments = () => {
   //getting all the appointments
   useEffect(() => {
     axios
-      .get('https://damiansoch-001-site1.etempurl.com/api/Appointments', {
-        headers: {
-          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-        },
-      })
+      .get(
+        `https://damiansoch-001-site1.etempurl.com/api/Appointments/${skipTake.skip},${skipTake.take}`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          },
+        }
+      )
 
       .then((res) => {
         setAppointments(res.data);
@@ -45,7 +60,7 @@ const Appointments = () => {
       .finally(() => {
         setLoading(true);
       });
-  }, []);
+  }, [skipTake.skip]);
 
   return (
     <>
@@ -95,6 +110,39 @@ const Appointments = () => {
           />
         )}
         <AddAppointment show={modalShow} onHide={() => setModalShow(false)} />
+        <Container>
+          <Row>
+            <Col className="text-end">
+              <Button
+                disabled={skipTake.skip <= 0}
+                variant="success"
+                onClick={() => {
+                  setSkipTake({
+                    skip: skipTake.skip - 10,
+                    take: 10,
+                  });
+                }}
+              >
+                Prev
+              </Button>
+            </Col>
+            <Col></Col>
+            <Col className="text-start">
+              <Button
+                disabled={appointments.length < skipTake.take}
+                variant="success"
+                onClick={() => {
+                  setSkipTake({
+                    skip: skipTake.skip + 10,
+                    take: 10,
+                  });
+                }}
+              >
+                Next
+              </Button>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </>
   );
