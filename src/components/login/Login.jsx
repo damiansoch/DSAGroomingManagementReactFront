@@ -1,6 +1,7 @@
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { useState } from 'react';
 import { useContext } from 'react';
@@ -12,6 +13,7 @@ import jwt from 'jwt-decode';
 import Cookies from 'universal-cookie';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const { user, setUser } = useContext(UserContext);
@@ -65,6 +67,7 @@ const Login = () => {
   };
 
   const submitForm = (e) => {
+    setLoading(true);
     e.preventDefault();
     axios
       .post(
@@ -110,9 +113,16 @@ const Login = () => {
             onChange={(e) => onChangeHandler(e.target)}
           />
         </FloatingLabel>
-        <Button variant="outline-primary" type="Submit" className="mt-3">
-          LogIn
+        <Button variant="outline-primary" type="Submit" className=" my-3 ">
+          <span style={{ heigth: '100%' }}>LogIn</span>
         </Button>
+        {loading ? (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger" className="me-2" />
+          </div>
+        ) : (
+          <></>
+        )}
       </Form>
     </>
   );

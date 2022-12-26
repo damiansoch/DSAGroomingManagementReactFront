@@ -6,9 +6,13 @@ import { useEffect, useState } from 'react';
 import SinglePet from './SinglePet';
 
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+
 import AddPet from './AddPet';
 
 const Pets = () => {
+  const [loading, setLoading] = useState(false);
+
   const [modalShow, setModalShow] = useState(false);
 
   const [pets, setPets] = useState([]);
@@ -23,6 +27,9 @@ const Pets = () => {
       })
       .then((res) => {
         setPets(res.data);
+      })
+      .finally(() => {
+        setLoading(true);
       });
   }, []);
   return (
@@ -35,7 +42,19 @@ const Pets = () => {
       >
         Add pet
       </Button>
-      <SinglePet pets={pets} />
+      {loading ? (
+        <SinglePet pets={pets} />
+      ) : (
+        <Spinner
+          animation="border"
+          variant="danger"
+          style={{
+            position: 'fixed',
+            top: '49%',
+            left: '49%',
+          }}
+        />
+      )}
       <AddPet show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );

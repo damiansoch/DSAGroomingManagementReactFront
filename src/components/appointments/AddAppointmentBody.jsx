@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const AddAppointmentBody = ({
   addAppointmentRequest,
@@ -37,6 +38,7 @@ const AddAppointmentBody = ({
           },
         }
       )
+
       .then((res) => {
         console.log('appointment added');
         navigate('/Sucess', { replace: true });

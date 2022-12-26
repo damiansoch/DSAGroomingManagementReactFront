@@ -36,6 +36,7 @@ const SingleAppointment = ({
           },
         }
       )
+
       .then((res) => {
         console.log('deleted');
         window.location.reload(false);

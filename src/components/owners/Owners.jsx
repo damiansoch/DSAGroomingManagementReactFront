@@ -3,10 +3,13 @@ import axios from 'axios';
 import SingleOwner from './SingleOwner';
 import Button from 'react-bootstrap/Button';
 import Cookies from 'universal-cookie';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { Link } from 'react-router-dom';
 
 const Owners = () => {
+  const [loading, setLoading] = useState(false);
+
   const [owners, setOwners] = useState([]);
   const cookies = new Cookies();
 
@@ -19,6 +22,9 @@ const Owners = () => {
       })
       .then((res) => {
         setOwners(res.data);
+      })
+      .finally(() => {
+        setLoading(true);
       });
   }, []);
 
@@ -31,7 +37,19 @@ const Owners = () => {
         </Button>
       </Link>
 
-      <SingleOwner owners={owners} />
+      {loading ? (
+        <SingleOwner owners={owners} />
+      ) : (
+        <Spinner
+          animation="border"
+          variant="danger"
+          style={{
+            position: 'fixed',
+            top: '49%',
+            left: '49%',
+          }}
+        />
+      )}
     </>
   );
 };

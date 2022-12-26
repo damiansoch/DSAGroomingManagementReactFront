@@ -6,7 +6,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import AllUsersBody from './AllUsersBody';
 
+import Spinner from 'react-bootstrap/Spinner';
+
 const AllUsers = () => {
+  const [loading, setLoading] = useState(false);
   const cookies = new Cookies();
   const [users, setUsers] = useState(null);
   // console.log(users);
@@ -23,11 +26,26 @@ const AllUsers = () => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(true);
       });
   }, []);
   return (
     <div>
-      <AllUsersBody users={users} />
+      {loading ? (
+        <AllUsersBody users={users} />
+      ) : (
+        <Spinner
+          animation="border"
+          variant="danger"
+          style={{
+            position: 'fixed',
+            top: '49%',
+            left: '49%',
+          }}
+        />
+      )}
     </div>
   );
 };
