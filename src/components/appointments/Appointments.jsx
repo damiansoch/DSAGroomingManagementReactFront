@@ -40,7 +40,7 @@ const Appointments = () => {
   useEffect(() => {
     axios
       .get(
-        `https://localhost:7162/api/Appointments/${skipTake.skip},${skipTake.take}`,
+        `https://damiansoch-001-site1.etempurl.com/api/Appointments/${skipTake.skip},${skipTake.take}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,

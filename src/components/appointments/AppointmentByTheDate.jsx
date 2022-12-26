@@ -38,7 +38,9 @@ const AppointmentByTheDate = () => {
   useEffect(() => {
     axios
       .get(
-        `https://localhost:7162/api/Appointments/${(1 + date.getMonth())
+        `https://damiansoch-001-site1.etempurl.com/api/Appointments/${(
+          1 + date.getMonth()
+        )
           .toString()
           .padStart(2, '0')}-${date
           .getDate()

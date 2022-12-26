@@ -29,7 +29,7 @@ const EditAppointmentBody = ({
     e.preventDefault();
     axios
       .put(
-        `https://localhost:7162/api/Appointments/${currentAppointment.id}`,
+        `https://damiansoch-001-site1.etempurl.com/api/Appointments/${currentAppointment.id}`,
         editAppointmentRequest,
         {
           headers: {
