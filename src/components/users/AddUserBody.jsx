@@ -42,15 +42,11 @@ const AddUserBody = ({ addUserRequest, setAddUserRequest, userRoles }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        'https://damiansoch-001-site1.etempurl.com/api/Users',
-        addUserRequest,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-          },
-        }
-      )
+      .post('https://localhost:7162/api/Users', addUserRequest, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
       .then((res) => {
         console.log('user added');
         navigate('/Sucess', { replace: true });

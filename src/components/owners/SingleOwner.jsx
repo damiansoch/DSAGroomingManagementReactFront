@@ -19,14 +19,11 @@ const SingleOwner = ({ owners }) => {
     //popover for delete owner
     const deleteOwnerHandler = () => {
       axios
-        .delete(
-          `https://damiansoch-001-site1.etempurl.com/api/Owners/${currentOwner.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-            },
-          }
-        )
+        .delete(`https://localhost:7162/api/Owners/${currentOwner.id}`, {
+          headers: {
+            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+          },
+        })
         .then((res) => {
           console.log('Owner deleted');
           window.location.reload(false);

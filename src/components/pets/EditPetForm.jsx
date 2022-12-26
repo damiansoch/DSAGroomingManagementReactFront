@@ -23,15 +23,11 @@ const EditPetForm = ({ currentPet, editPetRequest, setEditPetRequest }) => {
   const formSubmitHandler = (e) => {
     e.preventDefault();
     axios
-      .put(
-        `https://damiansoch-001-site1.etempurl.com/api/Pets/${currentPet.id}`,
-        editPetRequest,
-        {
-          headers: {
-            Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
-          },
-        }
-      )
+      .put(`https://localhost:7162/api/Pets/${currentPet.id}`, editPetRequest, {
+        headers: {
+          Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
+        },
+      })
       .then((res) => {
         console.log(res.status);
         navigate('/Sucess', { replace: true });

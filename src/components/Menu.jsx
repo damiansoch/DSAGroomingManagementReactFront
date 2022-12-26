@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import { useContext } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from 'react-bootstrap/Button';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -49,19 +50,24 @@ const Menu = () => {
               ) : (
                 <>
                   <Link className="nav-link" to="/Appointments">
-                    Appointments
+                    <Button variant="outline-warning">Appointments</Button>
+                  </Link>
+                  <Link className="nav-link" to="/AppointmentsByTheDate">
+                    <Button variant="outline-warning">
+                      Appointments by the date
+                    </Button>
                   </Link>
                   <Link className="nav-link" to="/Owners">
-                    Owners
+                    <Button variant="outline-warning">Owners</Button>
                   </Link>
                   <Link className="nav-link" to="/Pets">
-                    Pets
+                    <Button variant="outline-warning">Pets</Button>
                   </Link>
                   {user[
                     'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
                   ] && adminOptions()}
                   <Link className="nav-link ms-5" to="/Logout">
-                    Logout
+                    <Button variant="outline-warning">Logout</Button>
                   </Link>
                 </>
               )}

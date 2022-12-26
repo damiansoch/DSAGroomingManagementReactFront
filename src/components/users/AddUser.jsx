@@ -24,7 +24,7 @@ const AddUser = () => {
   // getting all roles for the select
   useEffect(() => {
     axios
-      .get('https://damiansoch-001-site1.etempurl.com/api/Roles', {
+      .get('https://localhost:7162/api/Roles', {
         headers: {
           Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
         },

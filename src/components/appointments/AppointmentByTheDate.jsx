@@ -16,15 +16,13 @@ import UserContext from '../../context/UserContext';
 import AddAppointment from './AddAppointment';
 import SearchAppointment from './AppointmentSearch/SearchAppointment';
 
-const Appointments = () => {
+const AppointmentByTheDate = () => {
   const [loading, setLoading] = useState(false);
 
   const { logout } = useContext(UserContext);
-  //skip-take params
-  const [skipTake, setSkipTake] = useState({
-    skip: 0,
-    take: 10,
-  });
+  //date params
+  const [date, setDate] = useState(new Date());
+
   //use state for searches
   const [searchPetName, setSearchPetName] = useState('');
   const [searchOwnerName, setSearchOwnerName] = useState('');
@@ -40,7 +38,12 @@ const Appointments = () => {
   useEffect(() => {
     axios
       .get(
-        `https://localhost:7162/api/Appointments/${skipTake.skip},${skipTake.take}`,
+        `https://localhost:7162/api/Appointments/${(1 + date.getMonth())
+          .toString()
+          .padStart(2, '0')}-${date
+          .getDate()
+          .toString()
+          .padStart(2, '0')}-${date.getFullYear()}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
@@ -60,7 +63,7 @@ const Appointments = () => {
       .finally(() => {
         setLoading(true);
       });
-  }, [skipTake.skip]);
+  }, []);
 
   return (
     <>
@@ -113,31 +116,13 @@ const Appointments = () => {
         <Container>
           <Row>
             <Col className="text-end">
-              <Button
-                disabled={skipTake.skip <= 0}
-                variant="success"
-                onClick={() => {
-                  setSkipTake({
-                    skip: skipTake.skip - 10,
-                    take: 10,
-                  });
-                }}
-              >
+              <Button variant="success" onClick={() => {}}>
                 Prev
               </Button>
             </Col>
             <Col></Col>
             <Col className="text-start">
-              <Button
-                disabled={appointments.length < skipTake.take}
-                variant="success"
-                onClick={() => {
-                  setSkipTake({
-                    skip: skipTake.skip + 10,
-                    take: 10,
-                  });
-                }}
-              >
+              <Button variant="success" onClick={() => {}}>
                 Next
               </Button>
             </Col>
@@ -148,4 +133,4 @@ const Appointments = () => {
   );
 };
 
-export default Appointments;
+export default AppointmentByTheDate;

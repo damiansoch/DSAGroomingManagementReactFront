@@ -16,6 +16,7 @@ import { CurrentPetProvider } from './context/CurrentPetContext';
 import AllUsers from './components/users/AllUsers';
 import AddUser from './components/users/AddUser';
 import RequestOK from './components/RequestOK';
+import AppointmentByTheDate from './components/appointments/AppointmentByTheDate';
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
                   <Route
                     path="/Appointments/EditAppointment"
                     element={<EditAppointment />}
+                  />
+                  <Route
+                    path="/AppointmentsByTheDate"
+                    element={<AppointmentByTheDate />}
                   />
 
                   {/* Owners */}
