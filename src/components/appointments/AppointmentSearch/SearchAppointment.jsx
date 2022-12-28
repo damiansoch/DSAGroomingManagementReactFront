@@ -1,17 +1,12 @@
-import Dropdown from "react-bootstrap/Dropdown";
-import SearchDate from "./SearchDate";
-import SearchName from "./SearchName";
-import SearchOwnerName from "./SearchOwnerName";
+import Dropdown from 'react-bootstrap/Dropdown';
+import SearchName from './SearchName';
+import SearchOwnerName from './SearchOwnerName';
 
 const SearchAppointment = ({
   setSearchPetName,
   searchPetName,
   searchOwnerName,
   setSearchOwnerName,
-  searchStartDate,
-  setSearchStartDate,
-  searchEndDate,
-  setSearchEndDate,
 }) => {
   return (
     <Dropdown>
@@ -28,12 +23,6 @@ const SearchAppointment = ({
           <SearchOwnerName
             searchOwnerName={searchOwnerName}
             setSearchOwnerName={setSearchOwnerName}
-          />
-          <SearchDate
-            searchStartDate={searchStartDate}
-            setSearchStartDate={setSearchStartDate}
-            searchEndDate={searchEndDate}
-            setSearchEndDate={setSearchEndDate}
           />
         </div>
       </Dropdown.Menu>

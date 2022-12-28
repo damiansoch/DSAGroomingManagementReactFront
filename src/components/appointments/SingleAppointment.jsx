@@ -16,8 +16,7 @@ const SingleAppointment = ({
   appointments,
   searchPetName,
   searchOwnerName,
-  searchStartDate,
-  searchEndDate,
+
   startingNumber,
 }) => {
   const { currentAppointment, setCurrentAppointment } = useContext(
@@ -77,14 +76,6 @@ const SingleAppointment = ({
       .toLowerCase()
       .includes(searchOwnerName.toString().toLowerCase())
   );
-  //-------------------------------------------------------------
-  //------------------------filter appointments by a date of the appointment
-  if ((searchStartDate !== '') & (searchEndDate !== '')) {
-    appointments = appointments.filter(
-      (appointment) =>
-        appointment.date >= searchStartDate && appointment.date <= searchEndDate
-    );
-  }
   //-------------------------------------------------------------
 
   const [modalShow, setModalShow] = useState(false);

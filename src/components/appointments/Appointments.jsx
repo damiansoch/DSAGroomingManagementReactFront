@@ -28,8 +28,6 @@ const Appointments = () => {
   //use state for searches
   const [searchPetName, setSearchPetName] = useState('');
   const [searchOwnerName, setSearchOwnerName] = useState('');
-  const [searchStartDate, setSearchStartDate] = useState('');
-  const [searchEndDate, setSearchEndDate] = useState('');
 
   //----------------------
 
@@ -69,8 +67,6 @@ const Appointments = () => {
           onClick={() => {
             setSearchPetName('');
             setSearchOwnerName('');
-            setSearchStartDate('');
-            setSearchEndDate('');
           }}
         >
           Clear all search
@@ -80,10 +76,6 @@ const Appointments = () => {
           searchPetName={searchPetName}
           searchOwnerName={searchOwnerName}
           setSearchOwnerName={setSearchOwnerName}
-          searchStartDate={searchStartDate}
-          setSearchStartDate={setSearchStartDate}
-          searchEndDate={searchEndDate}
-          setSearchEndDate={setSearchEndDate}
         />
 
         <h1 className="my-2 text-center">Appointments </h1>
@@ -95,8 +87,6 @@ const Appointments = () => {
             appointments={appointments}
             searchPetName={searchPetName}
             searchOwnerName={searchOwnerName}
-            searchStartDate={searchStartDate}
-            searchEndDate={searchEndDate}
             startingNumber={skipTake.skip}
           />
         ) : (
