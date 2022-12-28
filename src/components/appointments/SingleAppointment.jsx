@@ -18,6 +18,7 @@ const SingleAppointment = ({
   searchOwnerName,
   searchStartDate,
   searchEndDate,
+  startingNumber,
 }) => {
   const { currentAppointment, setCurrentAppointment } = useContext(
     CurrentAppointmentContext
@@ -94,7 +95,13 @@ const SingleAppointment = ({
 
     return (
       <tr key={index}>
-        <td>{index + 1}</td>
+        <td>
+          {startingNumber ? (
+            <p>{startingNumber + index + 1}</p>
+          ) : (
+            <p>{index + 1}</p>
+          )}
+        </td>
         <td>
           {date.getDate() +
             '-' +

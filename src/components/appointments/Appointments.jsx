@@ -86,7 +86,7 @@ const Appointments = () => {
           setSearchEndDate={setSearchEndDate}
         />
 
-        <h1 className="my-2 text-center">Appointments</h1>
+        <h1 className="my-2 text-center">Appointments </h1>
         <Button variant="primary" onClick={() => setModalShow(true)}>
           Add Appointment
         </Button>
@@ -97,6 +97,7 @@ const Appointments = () => {
             searchOwnerName={searchOwnerName}
             searchStartDate={searchStartDate}
             searchEndDate={searchEndDate}
+            startingNumber={skipTake.skip}
           />
         ) : (
           <Spinner

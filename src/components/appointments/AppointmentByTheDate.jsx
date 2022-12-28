@@ -141,7 +141,15 @@ const AppointmentByTheDate = () => {
                 Prev
               </Button>
             </Col>
-            <Col></Col>
+            <Col className="text-center">
+              <Button
+                onClick={() => {
+                  setMyDate(new Date());
+                }}
+              >
+                Today
+              </Button>
+            </Col>
             <Col className="text-start">
               <Button
                 variant="success"
