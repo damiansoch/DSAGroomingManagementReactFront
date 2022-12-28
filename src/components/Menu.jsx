@@ -11,7 +11,6 @@ import { useState } from 'react';
 
 const Menu = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
 
   //checking if user is admin
   const adminOptions = () => {

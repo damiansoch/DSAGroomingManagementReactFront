@@ -40,7 +40,7 @@ const Appointments = () => {
   useEffect(() => {
     axios
       .get(
-        `https://damiansoch-001-site1.etempurl.com/api/Appointments/${skipTake.skip},${skipTake.take}`,
+        `https://damiansoch-001-site1.etempurl.com/AllAppointments/${skipTake.skip},${skipTake.take}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
@@ -54,7 +54,7 @@ const Appointments = () => {
       .catch((err) => {
         console.log(err.message);
         if (err.message === 'Network Error') {
-          logout();
+          // logout();
         }
       })
       .finally(() => {

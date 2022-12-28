@@ -21,7 +21,7 @@ const AppointmentByTheDate = () => {
 
   const { logout } = useContext(UserContext);
   //date params
-  const [date, setDate] = useState(new Date());
+  const [myDate, setMyDate] = useState(new Date());
 
   //use state for searches
   const [searchPetName, setSearchPetName] = useState('');
@@ -32,6 +32,7 @@ const AppointmentByTheDate = () => {
   //----------------------
 
   const [appointments, setAppointments] = useState([]);
+
   const [modalShow, setModalShow] = useState(false);
   const cookies = new Cookies();
   //getting all the appointments
@@ -39,13 +40,13 @@ const AppointmentByTheDate = () => {
     axios
       .get(
         `https://damiansoch-001-site1.etempurl.com/api/Appointments/${(
-          1 + date.getMonth()
+          1 + myDate.getMonth()
         )
           .toString()
-          .padStart(2, '0')}-${date
+          .padStart(2, '0')}-${myDate
           .getDate()
           .toString()
-          .padStart(2, '0')}-${date.getFullYear()}`,
+          .padStart(2, '0')}-${myDate.getFullYear()}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.get('jwt_authorisation')}`,
@@ -58,6 +59,7 @@ const AppointmentByTheDate = () => {
       })
       .catch((err) => {
         console.log(err.message);
+
         if (err.message === 'Network Error') {
           logout();
         }
@@ -65,8 +67,33 @@ const AppointmentByTheDate = () => {
       .finally(() => {
         setLoading(true);
       });
-  }, []);
+  }, [myDate]);
 
+  //plus day and minus day
+  const plusDay = () => {
+    setMyDate((date) => {
+      date.setDate(date.getDate() + 1);
+      return new Date(date);
+    });
+  };
+  const minusDay = () => {
+    setMyDate((date) => {
+      date.setDate(date.getDate() - 1);
+      return new Date(date);
+    });
+  };
+  //------------------------
+
+  //checking if appointments array length ==0
+  const [appointmentsEmpty, setAppointmentEmpty] = useState(false);
+  useEffect(() => {
+    if (appointments.length === 0) {
+      setAppointmentEmpty(true);
+    } else {
+      setAppointmentEmpty(false);
+    }
+  }, [appointments]);
+  //----------------------------------------
   return (
     <>
       <div className="text-end my-2 ">
@@ -92,9 +119,37 @@ const AppointmentByTheDate = () => {
         />
 
         <h1 className="my-2 text-center">Appointments</h1>
+        <h3 className="my-2 text-center text-success">
+          {myDate.toLocaleDateString()}
+        </h3>
         <Button variant="primary" onClick={() => setModalShow(true)}>
           Add Appointment
         </Button>
+        <Container>
+          <Row>
+            <Col className="text-end">
+              <Button
+                variant="success"
+                onClick={() => {
+                  minusDay();
+                }}
+              >
+                Prev
+              </Button>
+            </Col>
+            <Col></Col>
+            <Col className="text-start">
+              <Button
+                variant="success"
+                onClick={() => {
+                  plusDay();
+                }}
+              >
+                Next
+              </Button>
+            </Col>
+          </Row>
+        </Container>
         {loading ? (
           <SingleAppointment
             appointments={appointments}
@@ -114,22 +169,12 @@ const AppointmentByTheDate = () => {
             }}
           />
         )}
+        {appointmentsEmpty && (
+          <h3 className="text-center text-danger my-">
+            No appointments on selected date.
+          </h3>
+        )}
         <AddAppointment show={modalShow} onHide={() => setModalShow(false)} />
-        <Container>
-          <Row>
-            <Col className="text-end">
-              <Button variant="success" onClick={() => {}}>
-                Prev
-              </Button>
-            </Col>
-            <Col></Col>
-            <Col className="text-start">
-              <Button variant="success" onClick={() => {}}>
-                Next
-              </Button>
-            </Col>
-          </Row>
-        </Container>
       </div>
     </>
   );
