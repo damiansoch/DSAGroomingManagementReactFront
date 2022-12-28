@@ -122,7 +122,11 @@ const AppointmentByTheDate = () => {
         <h3 className="my-2 text-center text-success">
           {myDate.toLocaleDateString()}
         </h3>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
+        <Button
+          variant="primary"
+          onClick={() => setModalShow(true)}
+          className="my-3"
+        >
           Add Appointment
         </Button>
         <Container>
