@@ -70,12 +70,14 @@ const AppointmentByTheDate = () => {
 
   //plus day and minus day
   const plusDay = () => {
+    setLoading(false);
     setMyDate((date) => {
       date.setDate(date.getDate() + 1);
       return new Date(date);
     });
   };
   const minusDay = () => {
+    setLoading(false);
     setMyDate((date) => {
       date.setDate(date.getDate() - 1);
       return new Date(date);
