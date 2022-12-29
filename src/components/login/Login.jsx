@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jwt from 'jwt-decode';
 import Cookies from 'universal-cookie';
+import { Col, Container } from 'react-bootstrap';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -124,6 +125,11 @@ const Login = () => {
           <></>
         )}
       </Form>
+      <Container>
+        <Col className="text-center">
+          <img width={'200px'} src="/img/clipart14264.png" alt="dog" />
+        </Col>
+      </Container>
     </>
   );
 };
