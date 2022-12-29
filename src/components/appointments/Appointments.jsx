@@ -15,6 +15,7 @@ import Col from 'react-bootstrap/Col';
 import UserContext from '../../context/UserContext';
 import AddAppointment from './AddAppointment';
 import SearchAppointment from './AppointmentSearch/SearchAppointment';
+import AppointmentTopButtons from './AppointmentTopButtons';
 
 const Appointments = () => {
   const [loading, setLoading] = useState(false);
@@ -62,26 +63,17 @@ const Appointments = () => {
 
   return (
     <>
-      <div className="text-end my-2 ">
-        <Button
-          onClick={() => {
-            setSearchPetName('');
-            setSearchOwnerName('');
-          }}
-        >
-          Clear all search
-        </Button>
-        <SearchAppointment
+      <div className="text-end my-4 ">
+        <AppointmentTopButtons
+          setModalShow={setModalShow}
           setSearchPetName={setSearchPetName}
+          setSearchOwnerName={setSearchOwnerName}
           searchPetName={searchPetName}
           searchOwnerName={searchOwnerName}
-          setSearchOwnerName={setSearchOwnerName}
         />
 
-        <h1 className="my-2 text-center">Appointments </h1>
-        <Button variant="primary" onClick={() => setModalShow(true)}>
-          Add Appointment
-        </Button>
+        <h1 className="my-4 text-center">Appointments </h1>
+
         {loading ? (
           <SingleAppointment
             appointments={appointments}

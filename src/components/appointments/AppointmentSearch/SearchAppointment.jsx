@@ -10,7 +10,7 @@ const SearchAppointment = ({
 }) => {
   return (
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic" className="my-2">
+      <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
         Search appointment
       </Dropdown.Toggle>
 

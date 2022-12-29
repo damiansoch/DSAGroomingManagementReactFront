@@ -15,6 +15,7 @@ import Col from 'react-bootstrap/Col';
 import UserContext from '../../context/UserContext';
 import AddAppointment from './AddAppointment';
 import SearchAppointment from './AppointmentSearch/SearchAppointment';
+import AppointmentTopButtons from './AppointmentTopButtons';
 
 const AppointmentByTheDate = () => {
   const [loading, setLoading] = useState(false);
@@ -26,8 +27,6 @@ const AppointmentByTheDate = () => {
   //use state for searches
   const [searchPetName, setSearchPetName] = useState('');
   const [searchOwnerName, setSearchOwnerName] = useState('');
-  const [searchStartDate, setSearchStartDate] = useState('');
-  const [searchEndDate, setSearchEndDate] = useState('');
 
   //----------------------
 
@@ -96,40 +95,21 @@ const AppointmentByTheDate = () => {
   //----------------------------------------
   return (
     <>
-      <div className="text-end my-2 ">
-        <Button
-          onClick={() => {
-            setSearchPetName('');
-            setSearchOwnerName('');
-            setSearchStartDate('');
-            setSearchEndDate('');
-          }}
-        >
-          Clear all search
-        </Button>
-        <SearchAppointment
+      <div className="text-end my-4 ">
+        <AppointmentTopButtons
+          setModalShow={setModalShow}
           setSearchPetName={setSearchPetName}
+          setSearchOwnerName={setSearchOwnerName}
           searchPetName={searchPetName}
           searchOwnerName={searchOwnerName}
-          setSearchOwnerName={setSearchOwnerName}
-          searchStartDate={searchStartDate}
-          setSearchStartDate={setSearchStartDate}
-          searchEndDate={searchEndDate}
-          setSearchEndDate={setSearchEndDate}
         />
 
-        <h1 className="my-2 text-center">Appointments</h1>
+        <h1 className="my-4 text-center">Appointments</h1>
         <h3 className="my-2 text-center text-success">
           {myDate.toLocaleDateString()}
         </h3>
-        <Button
-          variant="primary"
-          onClick={() => setModalShow(true)}
-          className="my-3"
-        >
-          Add Appointment
-        </Button>
-        <Container>
+
+        <Container className="my-4">
           <Row>
             <Col className="text-end">
               <Button
@@ -167,8 +147,6 @@ const AppointmentByTheDate = () => {
             appointments={appointments}
             searchPetName={searchPetName}
             searchOwnerName={searchOwnerName}
-            searchStartDate={searchStartDate}
-            searchEndDate={searchEndDate}
           />
         ) : (
           <Spinner
